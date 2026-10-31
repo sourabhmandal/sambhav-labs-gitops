@@ -1,0 +1,65 @@
+services:
+  keycloak:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: sambhav/keycloak:26.8.1
+    container_name: keycloak
+    restart: unless-stopped
+    init: true
+
+    command: ["start", "--optimized"]
+
+    env_file:
+      - path: .env
+        required: false
+
+    environment:
+      KC_BOOTSTRAP_ADMIN_USERNAME: ${KC_BOOTSTRAP_ADMIN_USERNAME:?Set admin username}
+      KC_BOOTSTRAP_ADMIN_PASSWORD: ${KC_BOOTSTRAP_ADMIN_PASSWORD:?Set admin password}
+
+      KC_DB: postgres
+      KC_DB_URL_HOST: ${KC_DB_URL_HOST:?Set database host}
+      KC_DB_URL_PORT: ${KC_DB_URL_PORT:-5432}
+      KC_DB_URL_DATABASE: ${KC_DB_URL_DATABASE:?Set database name}
+      KC_DB_USERNAME: ${KC_DB_USERNAME:?Set database username}
+      KC_DB_PASSWORD: ${KC_DB_PASSWORD:?Set database password}
+
+      KC_HOSTNAME: ${KC_HOSTNAME:-https://auth.sambhavlabs.com}
+      KC_HOSTNAME_STRICT: "true"
+      KC_HTTP_ENABLED: "true"
+      KC_PROXY_HEADERS: xforwarded
+
+      KC_HEALTH_ENABLED: "true"
+      KC_METRICS_ENABLED: "true"
+      KC_LOG_LEVEL: info
+
+    networks:
+      - keycloak
+
+    labels:
+      - "traefik.enable=true"
+      - "traefik.docker.network=keycloak"
+      - "traefik.http.routers.keycloak.rule=Host(`auth.sambhavlabs.com`)"
+      - "traefik.http.routers.keycloak.entrypoints=websecure"
+      - "traefik.http.routers.keycloak.tls=true"
+      - "traefik.http.routers.keycloak.tls.certresolver=cloudflare"
+      - "traefik.http.routers.keycloak.tls.domains[0].main=auth.sambhavlabs.com"
+      - "traefik.http.services.keycloak.loadbalancer.server.port=8080"
+
+    mem_limit: 1536m
+    cpus: "1.5"
+    stop_grace_period: 60s
+
+    logging:
+      driver: json-file
+      options:
+        max-size: "20m"
+        max-file: "5"
+
+    security_opt:
+      - no-new-privileges:true
+
+networks:
+  keycloak:
+    name: keycloak
