@@ -6,51 +6,6 @@ x-zitadel-db-env: &zitadel-db-env
   ZITADEL_DATABASE_POSTGRES_MAXIDLECONNS: 3
 
 services:
-  zitadel-init:
-    image: ghcr.io/zitadel/zitadel:${ZITADEL_VERSION}
-    restart: "no"
-    command: init
-    environment:
-      <<: *zitadel-db-env
-    networks:
-      - zitadel
-
-  zitadel-setup:
-    image: ghcr.io/zitadel/zitadel:${ZITADEL_VERSION}
-    restart: "no"
-    user: "0"
-    command: setup --masterkey "${ZITADEL_MASTERKEY}"
-    environment:
-      <<: *zitadel-db-env
-      ZITADEL_EXTERNALDOMAIN: ${ZITADEL_DOMAIN}
-      ZITADEL_EXTERNALPORT: 443
-      ZITADEL_EXTERNALSECURE: "true"
-
-      ZITADEL_FIRSTINSTANCE_ORG_HUMAN_USERNAME: ${ZITADEL_FIRSTINSTANCE_ORG_HUMAN_USERNAME}
-      ZITADEL_FIRSTINSTANCE_ORG_HUMAN_EMAIL_ADDRESS: ${ZITADEL_FIRSTINSTANCE_ORG_HUMAN_EMAIL_ADDRESS}
-      ZITADEL_FIRSTINSTANCE_ORG_HUMAN_EMAIL_VERIFIED: "true"
-      ZITADEL_FIRSTINSTANCE_ORG_HUMAN_PASSWORD: ${ZITADEL_FIRSTINSTANCE_ORG_HUMAN_PASSWORD}
-      ZITADEL_FIRSTINSTANCE_ORG_HUMAN_PASSWORDCHANGEREQUIRED: "false"
-      ZITADEL_DEFAULTINSTANCE_PASSWORDCOMPLEXITYPOLICY_HASSYMBOL: "false"
-      ZITADEL_FIRSTINSTANCE_LOGINCLIENTPATPATH: /zitadel/bootstrap/login-client.pat
-      ZITADEL_FIRSTINSTANCE_ORG_LOGINCLIENT_MACHINE_USERNAME: login-client
-      ZITADEL_FIRSTINSTANCE_ORG_LOGINCLIENT_MACHINE_NAME: Automatically Initialized IAM_LOGIN_CLIENT
-      ZITADEL_FIRSTINSTANCE_ORG_LOGINCLIENT_PAT_EXPIRATIONDATE: "2035-01-01T00:00:00Z"
-
-      ZITADEL_DEFAULTINSTANCE_FEATURES_LOGINV2_REQUIRED: "true"
-      ZITADEL_DEFAULTINSTANCE_FEATURES_LOGINV2_BASEURI: https://${ZITADEL_DOMAIN}/ui/v2/login/
-      ZITADEL_DEFAULTINSTANCE_OIDC_DEFAULTLOGINURLV2: https://${ZITADEL_DOMAIN}/ui/v2/login/login?authRequest=
-      ZITADEL_DEFAULTINSTANCE_OIDC_DEFAULTLOGOUTURLV2: https://${ZITADEL_DOMAIN}/ui/v2/login/logout?post_logout_redirect=
-      ZITADEL_DEFAULTINSTANCE_SAML_DEFAULTLOGINURLV2: https://${ZITADEL_DOMAIN}/ui/v2/login/login?samlRequest=
-      ZITADEL_OIDC_DEFAULTLOGINURLV2: https://${ZITADEL_DOMAIN}/ui/v2/login/login?authRequest=
-      ZITADEL_OIDC_DEFAULTLOGOUTURLV2: https://${ZITADEL_DOMAIN}/ui/v2/login/logout?post_logout_redirect=
-      ZITADEL_SAML_DEFAULTLOGINURLV2: https://${ZITADEL_DOMAIN}/ui/v2/login/login?samlRequest=
-      ZITADEL_EVENTSTORE_PUSHTIMEOUT: 300s
-    volumes:
-      - zitadel-bootstrap:/zitadel/bootstrap:rw
-    networks:
-      - zitadel
-
   zitadel-api:
     image: ghcr.io/zitadel/zitadel:${ZITADEL_VERSION}
     restart: unless-stopped
@@ -75,7 +30,7 @@ services:
       ZITADEL_FIRSTINSTANCE_ORG_LOGINCLIENT_MACHINE_NAME: Automatically Initialized IAM_LOGIN_CLIENT
       ZITADEL_FIRSTINSTANCE_ORG_LOGINCLIENT_PAT_EXPIRATIONDATE: "2035-01-01T00:00:00Z"
 
-      ZITADEL_DEFAULTINSTANCE_FEATURES_LOGINV2_REQUIRED: "true"
+      ZITADEL_DEFAULTINSTANCE_FEATURES_LOGINV2_REQUIRED: ${ZITADEL_LOGINV2_REQUIRED:-false}
       ZITADEL_DEFAULTINSTANCE_FEATURES_LOGINV2_BASEURI: https://${ZITADEL_DOMAIN}/ui/v2/login/
       ZITADEL_DEFAULTINSTANCE_OIDC_DEFAULTLOGINURLV2: https://${ZITADEL_DOMAIN}/ui/v2/login/login?authRequest=
       ZITADEL_DEFAULTINSTANCE_OIDC_DEFAULTLOGOUTURLV2: https://${ZITADEL_DOMAIN}/ui/v2/login/logout?post_logout_redirect=
@@ -146,7 +101,7 @@ services:
       ZITADEL_API_URL: http://zitadel-api:8080
       ZITADEL_SESSION_COOKIE_SECRET: ${LOGIN_SESSION_COOKIE_SECRET}
       NEXT_PUBLIC_BASE_PATH: /ui/v2/login
-      ZITADEL_SERVICE_USER_TOKEN_FILE: /zitadel/bootstrap/login-client.pat
+      ZITADEL_SERVICE_USER_TOKEN: ${ZITADEL_SERVICE_USER_TOKEN:-}
       CUSTOM_REQUEST_HEADERS: Host:${ZITADEL_DOMAIN},X-Forwarded-Proto:https
       ZITADEL_TLS_ENABLED: "false"
     volumes:
