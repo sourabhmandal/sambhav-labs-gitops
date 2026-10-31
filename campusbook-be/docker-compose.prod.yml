@@ -1,0 +1,59 @@
+services:
+  campusbook-prod:
+    image: ghcr.io/sourabhmandal/campusbook-go:prod
+    pull_policy: always
+    restart: unless-stopped
+    deploy:
+      mode: replicated
+      replicas: 3
+    command: ["prod"]
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost:8000/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 5s
+    env_file:
+      - path: .env
+        required: false
+    environment:
+      - AWS_ACCESS_KEY_ID
+      - AWS_SECRET_ACCESS_KEY
+      - AWS_REGION=us-east-1
+    labels:
+      - "traefik.enable=true"
+      - "traefik.docker.network=campusbook"
+      - "traefik.http.routers.campusbook-prod.rule=Host(`campusbook.aitplacements.in`)"
+      - "traefik.http.routers.campusbook-prod.entrypoints=websecure"
+      - "traefik.http.routers.campusbook-prod.tls=true"
+      - "traefik.http.routers.campusbook-prod.tls.certresolver=cloudflare"
+      - "traefik.http.routers.campusbook-prod.tls.domains[0].main=campusbook.aitplacements.in"
+      - "traefik.http.services.campusbook-prod.loadbalancer.server.port=8000"
+      - "com.centurylinklabs.watchtower.enable=true"
+      - "com.centurylinklabs.watchtower.scope=campusbook-prod"
+
+  watchtower:
+    image: containrrr/watchtower:latest
+    pull_policy: always
+    container_name: campusbook-prod-watchtower
+    restart: unless-stopped
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ~/.docker/config.json:/config.json:ro
+    env_file:
+      - path: .env
+        required: false
+    environment:
+      - DOCKER_API_VERSION=1.44
+      - WATCHTOWER_CLEANUP=true
+      - WATCHTOWER_POLL_INTERVAL=60
+      - WATCHTOWER_LABEL_ENABLE=true
+      - WATCHTOWER_SCOPE=campusbook-prod
+      - WATCHTOWER_ROLLING_RESTART=true
+      - WATCHTOWER_INCLUDE_RESTARTING=true
+      - REPO_USER=${GHCR_USERNAME:-}
+      - REPO_PASS=${GHCR_TOKEN:-}
+
+networks:
+  default:
+    name: campusbook
