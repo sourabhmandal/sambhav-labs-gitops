@@ -1,9 +1,11 @@
 name: zitadel
 
-x-zitadel-db-env: &zitadel-db-env
+x-zitadel-db-env: &zitadel-db-env                                                                      
   ZITADEL_DATABASE_POSTGRES_DSN: ${ZITADEL_DATABASE_POSTGRES_DSN}
-  ZITADEL_DATABASE_POSTGRES_MAXOPENCONNS: 8
-  ZITADEL_DATABASE_POSTGRES_MAXIDLECONNS: 3
+  ZITADEL_DATABASE_POSTGRES_MAXOPENCONNS: 20
+  ZITADEL_DATABASE_POSTGRES_MAXIDLECONNS: 5
+  ZITADEL_DATABASE_POSTGRES_MAXCONNIDLETIME: 1m
+  ZITADEL_DATABASE_POSTGRES_MAXCONNLIFETIME: 5m
 
 services:
   zitadel-api:
@@ -166,12 +168,8 @@ services:
           - redis
 
 networks:
-    zitadel:
-      name: zitadel
-      enable_ipv6: true
-      ipam:
-        config:
-          - subnet: 2001:db8:1::/64
+  zitadel:
+    name: zitadel
 
 volumes:
   zitadel-bootstrap:
