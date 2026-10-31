@@ -20,6 +20,9 @@ services:
     restart: "no"
     user: "0"
     command: setup --masterkey "${ZITADEL_MASTERKEY}"
+    depends_on:
+      zitadel-init:
+        condition: service_completed_successfully
     environment:
       <<: *zitadel-db-env
       ZITADEL_EXTERNALDOMAIN: ${ZITADEL_DOMAIN}

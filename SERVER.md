@@ -36,13 +36,13 @@ aws secretsmanager get-secret-value \
   --output text \
   | jq -r 'to_entries[] | "\(.key)=\(.value | tostring)"' > zitadel-auth/.env
 
-docker compose -f zitadel-auth/docker-compose.yml up zitadel-api zitadel-login redis4zitadel -d
+docker compose -f zitadel-auth/docker-compose.yml up -d --remove-orphans
 ```
 
 6. Run Signoz
 
 ```bash
-docker compose -f signoz-monitoring/docker-compose.yml up -d
+docker compose -f signoz-monitoring/docker-compose.yml up -d --remove-orphans
 ```
 
 7. Run Traefik
@@ -55,5 +55,5 @@ aws secretsmanager get-secret-value \
   --output text \
   | jq -r 'to_entries[] | "\(.key)=\(.value | tostring)"' > traefik-proxy/.env
 
-docker compose -f traefik-proxy/docker-compose.yml up -d
+docker compose -f traefik-proxy/docker-compose.yml up -d --remove-orphans
 ```

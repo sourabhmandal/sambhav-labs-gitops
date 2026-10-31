@@ -30,7 +30,7 @@ services:
       ZITADEL_FIRSTINSTANCE_ORG_LOGINCLIENT_MACHINE_NAME: Automatically Initialized IAM_LOGIN_CLIENT
       ZITADEL_FIRSTINSTANCE_ORG_LOGINCLIENT_PAT_EXPIRATIONDATE: "2035-01-01T00:00:00Z"
 
-      ZITADEL_DEFAULTINSTANCE_FEATURES_LOGINV2_REQUIRED: ${ZITADEL_LOGINV2_REQUIRED:-false}
+      ZITADEL_DEFAULTINSTANCE_FEATURES_LOGINV2_REQUIRED: ${ZITADEL_LOGINV2_REQUIRED:-true}
       ZITADEL_DEFAULTINSTANCE_FEATURES_LOGINV2_BASEURI: https://${ZITADEL_DOMAIN}/ui/v2/login/
       ZITADEL_DEFAULTINSTANCE_OIDC_DEFAULTLOGINURLV2: https://${ZITADEL_DOMAIN}/ui/v2/login/login?authRequest=
       ZITADEL_DEFAULTINSTANCE_OIDC_DEFAULTLOGOUTURLV2: https://${ZITADEL_DOMAIN}/ui/v2/login/logout?post_logout_redirect=
@@ -41,13 +41,16 @@ services:
 
       ZITADEL_LOGSTORE_ACCESS_STDOUT_ENABLED: "true"
 
-      ZITADEL_CACHES_CONNECTORS_REDIS_ENABLED: "false"
-      ZITADEL_CACHES_CONNECTORS_REDIS_URL: redis://redis:6379
-      ZITADEL_CACHES_INSTANCE_CONNECTOR: ""
-      ZITADEL_CACHES_MILESTONES_CONNECTOR: ""
-      ZITADEL_CACHES_ORGANIZATION_CONNECTOR: ""
+      ZITADEL_CACHES_CONNECTORS_REDIS_ENABLED: "true"
+      ZITADEL_CACHES_CONNECTORS_REDIS_URL: redis://redis4zitadel:6379
+      ZITADEL_CACHES_INSTANCE_CONNECTOR: redis
+      ZITADEL_CACHES_MILESTONES_CONNECTOR: redis
+      ZITADEL_CACHES_ORGANIZATION_CONNECTOR: redis
       ZITADEL_EVENTSTORE_PUSHTIMEOUT: 300s
 
+    depends_on:
+      redis4zitadel:
+        condition: service_started
     healthcheck:
       test: ["CMD", "/app/zitadel", "ready"]
       interval: 10s
@@ -101,7 +104,7 @@ services:
       ZITADEL_API_URL: http://zitadel-api:8080
       ZITADEL_SESSION_COOKIE_SECRET: ${LOGIN_SESSION_COOKIE_SECRET}
       NEXT_PUBLIC_BASE_PATH: /ui/v2/login
-      ZITADEL_SERVICE_USER_TOKEN: ${ZITADEL_SERVICE_USER_TOKEN:-}
+      ZITADEL_SERVICE_USER_TOKEN_FILE: /zitadel/bootstrap/login-client.pat
       CUSTOM_REQUEST_HEADERS: Host:${ZITADEL_DOMAIN},X-Forwarded-Proto:https
       ZITADEL_TLS_ENABLED: "false"
     volumes:
@@ -152,15 +155,15 @@ services:
   redis4zitadel:
     image: redis:7-alpine
     restart: unless-stopped
-    profiles:
-      - cache
     command:
       - --save
       - ""
       - --appendonly
       - "no"
     networks:
-      - zitadel
+      zitadel:
+        aliases:
+          - redis
 
 networks:
   zitadel:
