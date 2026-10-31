@@ -12,8 +12,8 @@ spec:
   signoz:
     spec:
       env:
-        SIGNOZ_SQLSTORE_PROVIDER: "postgres"
-        SIGNOZ_SQLSTORE_POSTGRES_DSN: "postgresql://postgres.heooyooptqnikfwojusp:jYZxHA1vjQBCv15v@aws-1-ap-southeast-1.pooler.supabase.com:5432/signoz?sslmode=disable"
+        SIGNOZ_SQLSTORE_PROVIDER: "${SIGNOZ_SQLSTORE_PROVIDER:-postgres}"
+        SIGNOZ_SQLSTORE_POSTGRES_DSN: "${SIGNOZ_SQLSTORE_POSTGRES_DSN}"
   metastore:
     kind: postgres
     spec:

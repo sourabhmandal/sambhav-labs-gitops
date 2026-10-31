@@ -383,8 +383,8 @@ spec:
       config: {}
       enabled: true
       env:
-        SIGNOZ_SQLSTORE_POSTGRES_DSN: postgresql://postgres.heooyooptqnikfwojusp:jYZxHA1vjQBCv15v@aws-1-ap-southeast-1.pooler.supabase.com:5432/signoz?sslmode=disable
-        SIGNOZ_SQLSTORE_PROVIDER: postgres
+        SIGNOZ_SQLSTORE_POSTGRES_DSN: ${SIGNOZ_SQLSTORE_POSTGRES_DSN}
+        SIGNOZ_SQLSTORE_PROVIDER: ${SIGNOZ_SQLSTORE_PROVIDER:-postgres}
         SIGNOZ_TELEMETRYSTORE_CLICKHOUSE_DSN: tcp://signoz-telemetrystore-clickhouse-0-0:9000
         SIGNOZ_TELEMETRYSTORE_PROVIDER: clickhouse
       image: signoz/signoz:latest
@@ -397,8 +397,8 @@ spec:
         - ws://signoz-signoz-0:4320
       config: {}
       env:
-        SIGNOZ_SQLSTORE_POSTGRES_DSN: postgresql://postgres.heooyooptqnikfwojusp:jYZxHA1vjQBCv15v@aws-1-ap-southeast-1.pooler.supabase.com:5432/signoz?sslmode=disable
-        SIGNOZ_SQLSTORE_PROVIDER: postgres
+        SIGNOZ_SQLSTORE_POSTGRES_DSN: ${SIGNOZ_SQLSTORE_POSTGRES_DSN}
+        SIGNOZ_SQLSTORE_PROVIDER: ${SIGNOZ_SQLSTORE_PROVIDER:-postgres}
         SIGNOZ_TELEMETRYSTORE_CLICKHOUSE_DSN: tcp://signoz-telemetrystore-clickhouse-0-0:9000
         SIGNOZ_TELEMETRYSTORE_PROVIDER: clickhouse
   telemetrykeeper:
