@@ -55,8 +55,12 @@ services:
       - zitadel
 
 networks:
-  zitadel:
-    name: zitadel
+    zitadel:
+      name: zitadel
+      enable_ipv6: true
+      ipam:
+        config:
+          - subnet: 2001:db8:1::/64
 
 volumes:
   zitadel-bootstrap:
