@@ -5,6 +5,7 @@ FROM quay.io/keycloak/keycloak:26.8.1 AS builder
 ENV KC_DB=postgres
 ENV KC_HEALTH_ENABLED=true
 ENV KC_METRICS_ENABLED=true
+ENV KC_FEATURES=preview
 
 WORKDIR /opt/keycloak
 

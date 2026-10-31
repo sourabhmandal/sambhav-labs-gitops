@@ -31,6 +31,7 @@ services:
 
       KC_HEALTH_ENABLED: "true"
       KC_METRICS_ENABLED: "true"
+      KC_FEATURES: preview
       KC_LOG_LEVEL: info
 
     networks:
@@ -44,7 +45,11 @@ services:
       - "traefik.http.routers.keycloak.tls=true"
       - "traefik.http.routers.keycloak.tls.certresolver=cloudflare"
       - "traefik.http.routers.keycloak.tls.domains[0].main=auth.sambhavlabs.com"
+      - "traefik.http.routers.keycloak.middlewares=keycloak-redirect-root"
       - "traefik.http.services.keycloak.loadbalancer.server.port=8080"
+      - "traefik.http.middlewares.keycloak-redirect-root.redirectregex.regex=^https?://auth\\.sambhavlabs\\.com(/|/admin/?)?$$"
+      - "traefik.http.middlewares.keycloak-redirect-root.redirectregex.replacement=https://auth.sambhavlabs.com/admin/master/console/"
+      - "traefik.http.middlewares.keycloak-redirect-root.redirectregex.permanent=false"
 
     mem_limit: 1536m
     cpus: "1.5"
