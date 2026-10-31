@@ -36,6 +36,8 @@ aws secretsmanager get-secret-value \
   --output text \
   | jq -r 'to_entries[] | "\(.key)=\(.value | tostring)"' > zitadel-auth/.env
 
+docker compose -f zitadel-auth/zitadel-compose.migrate.yml up --remove-orphans
+
 docker compose -f zitadel-auth/docker-compose.yml up -d --remove-orphans
 ```
 
