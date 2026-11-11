@@ -1,0 +1,36 @@
+services:
+  keycloak:
+    image: quay.io/keycloak/keycloak:26.8.1
+    container_name: keycloak-local
+    command:
+      - "start-dev"
+      - "--spi-theme-static-max-age=-1"
+      - "--spi-theme-cache-themes=false"
+      - "--spi-theme-cache-templates=false"
+    ports:
+      - "8080:8080"
+    environment:
+      KC_BOOTSTRAP_ADMIN_USERNAME: ${KC_BOOTSTRAP_ADMIN_USERNAME}
+      KC_BOOTSTRAP_ADMIN_PASSWORD: ${KC_BOOTSTRAP_ADMIN_PASSWORD}
+      KC_DB: ${KC_DB:-postgres}
+      KC_DB_URL_HOST: ${KC_DB_URL_HOST:?Set database host}
+      KC_DB_URL_PORT: ${KC_DB_URL_PORT:-5432}
+      KC_DB_URL_DATABASE: ${KC_DB_URL_DATABASE:?Set database name}
+      KC_DB_USERNAME: ${KC_DB_USERNAME:?Set database username}
+      KC_DB_PASSWORD: ${KC_DB_PASSWORD:?Set database password}
+      KC_HOSTNAME: http://localhost:8080
+      KC_FEATURES: preview
+      # Prevents Keycloak from running Liquibase migrations or acquiring a write lock
+      KC_SPI_CONNECTIONS_JPA_QUARKUS_MIGRATION_STRATEGY: validate
+      # Prevents accidental table creation if pointed at an empty DB or wrong schema
+      KC_SPI_CONNECTIONS_JPA_QUARKUS_INITIALIZE_EMPTY: "false"
+    env_file:
+      - path: .env
+        required: false
+
+    volumes:
+      - ./themes:/opt/keycloak/themes
+      - keycloak-data:/opt/keycloak/data
+
+volumes:
+  keycloak-data:

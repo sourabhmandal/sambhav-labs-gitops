@@ -1,0 +1,76 @@
+{
+  "clientId": "aitp-login",
+  "name": "AIT Pune Login",
+  "description": "AIT Pune Login",
+  "rootUrl": "http:://localhost:3000/",
+  "adminUrl": "http:://localhost:3000/",
+  "baseUrl": "http:://localhost:3000/",
+  "surrogateAuthRequired": false,
+  "enabled": true,
+  "alwaysDisplayInConsole": true,
+  "clientAuthenticatorType": "client-secret",
+  "secret": "icMOJfym2pAjnehZTxnKYEkH6qtxaAjkLby0JQwep4YPm9QvPynQa3PNeAcXZb18EXlkU19h6ZXF3hzhgwBXWx",
+  "redirectUris": [
+    "http://localhost:3000/api/auth/callback",
+    "http://localhost:8000/api/auth/callback"
+  ],
+  "webOrigins": [
+    "http://localhost:8000/",
+    "http:://localhost:3000/"
+  ],
+  "notBefore": 0,
+  "bearerOnly": false,
+  "consentRequired": true,
+  "standardFlowEnabled": true,
+  "implicitFlowEnabled": false,
+  "directAccessGrantsEnabled": false,
+  "serviceAccountsEnabled": true,
+  "authorizationServicesEnabled": true,
+  "publicClient": false,
+  "frontchannelLogout": true,
+  "protocol": "openid-connect",
+  "attributes": {
+    "logout.confirmation.enabled": "false",
+    "client.secret.creation.time": "1793541139",
+    "oauth2.jwt.authorization.grant.enabled": "false",
+    "standard.token.exchange.enabled": "true",
+    "login_theme": "keycloak.v2",
+    "frontchannel.logout.session.required": "true",
+    "post.logout.redirect.uris": "http:://localhost:3000/",
+    "oauth2.device.authorization.grant.enabled": "false",
+    "use.jwks.url": "false",
+    "backchannel.logout.revoke.offline.tokens": "false",
+    "realm_client": "false",
+    "oidc.ciba.grant.enabled": "false",
+    "backchannel.logout.session.required": "true",
+    "display.on.consent.screen": "false",
+    "pkce.code.challenge.method": "S256",
+    "dpop.bound.access.tokens": "false"
+  },
+  "authenticationFlowBindingOverrides": {},
+  "fullScopeAllowed": true,
+  "nodeReRegistrationTimeout": -1,
+  "defaultClientScopes": [
+    "service_account",
+    "web-origins",
+    "acr",
+    "profile",
+    "offline_access",
+    "roles",
+    "basic",
+    "email"
+  ],
+  "optionalClientScopes": [
+    "address",
+    "delegation:user",
+    "phone",
+    "organization",
+    "delegation:client",
+    "microprofile-jwt"
+  ],
+  "access": {
+    "view": true,
+    "configure": true,
+    "manage": true
+  }
+}

@@ -41,10 +41,17 @@ docker compose -f zitadel-auth/zitadel-compose.migrate.yml up --remove-orphans
 docker compose -f zitadel-auth/docker-compose.yml up -d --remove-orphans
 ```
 
-6. Run Signoz
+6. Run Keycloak
 
 ```bash
-docker compose -f signoz-monitoring/docker-compose.yml up -d --remove-orphans
+aws secretsmanager get-secret-value \
+  --secret-id prod/keycloak \
+  --region us-east-1 \
+  --query 'SecretString' \
+  --output text \
+  | jq -r 'to_entries[] | "\(.key)=\(.value | tostring)"' > keycloak-auth/.env
+
+docker compose -f keycloak-auth/docker-compose.yml up -d --remove-orphans
 ```
 
 7. Run Traefik

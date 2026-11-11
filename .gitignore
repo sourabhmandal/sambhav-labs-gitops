@@ -1,2 +1,3 @@
 signoz-monitoring/pours/*
 .env
+.DS_Store
