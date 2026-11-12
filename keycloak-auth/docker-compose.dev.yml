@@ -9,6 +9,9 @@ services:
       - "--spi-theme-cache-templates=false"
     ports:
       - "8080:8080"
+    dns:
+      - 8.8.8.8
+      - 1.1.1.1
     environment:
       KC_BOOTSTRAP_ADMIN_USERNAME: ${KC_BOOTSTRAP_ADMIN_USERNAME}
       KC_BOOTSTRAP_ADMIN_PASSWORD: ${KC_BOOTSTRAP_ADMIN_PASSWORD}

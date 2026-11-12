@@ -1,6 +1,6 @@
 {
   "id": "703244f1-de4f-417e-a529-0e3a139b2eaa",
-  "realm": "aitpune",
+  "realm": "campusbook",
   "notBefore": 0,
   "defaultSignatureAlgorithm": "RS256",
   "revokeRefreshToken": false,
@@ -91,8 +91,26 @@
         "attributes": {}
       },
       {
+        "id": "6c11e5ec-dbdf-4c14-ac6d-a2e12e455534",
+        "name": "uma_authorization",
+        "description": "${role_uma_authorization}",
+        "composite": false,
+        "clientRole": false,
+        "containerId": "703244f1-de4f-417e-a529-0e3a139b2eaa",
+        "attributes": {}
+      },
+      {
+        "id": "b9dc5273-58c1-4172-bad7-d0be2195d14e",
+        "name": "offline_access",
+        "description": "${role_offline-access}",
+        "composite": false,
+        "clientRole": false,
+        "containerId": "703244f1-de4f-417e-a529-0e3a139b2eaa",
+        "attributes": {}
+      },
+      {
         "id": "4cd43b4c-e4f1-4c37-adb1-3ddacf27ed8f",
-        "name": "default-roles-aitpune",
+        "name": "default-roles-campusbook",
         "description": "${role_default-roles}",
         "composite": true,
         "composites": {
@@ -125,7 +143,7 @@
   "groups": [],
   "defaultRole": {
     "id": "4cd43b4c-e4f1-4c37-adb1-3ddacf27ed8f",
-    "name": "default-roles-aitpune",
+    "name": "default-roles-campusbook",
     "description": "${role_default-roles}",
     "composite": true,
     "clientRole": false,
@@ -491,79 +509,6 @@
             "access.token.claim": "true",
             "claim.name": "groups",
             "jsonType.label": "String"
-          }
-        }
-      ]
-    },
-    {
-      "id": "ec983c6c-a1e9-4c59-aa36-c9fdbeb63790",
-      "name": "oid4vc_natural_person_jwt",
-      "description": "OID4VCI credential scope that represents a natural person in format: jwt_vc_json",
-      "protocol": "oid4vc",
-      "attributes": {
-        "vc.credential_configuration_id": "oid4vc_natural_person_jwt",
-        "vc.credential_contexts": "oid4vc_natural_person",
-        "vc.credential_build_config.hash_algorithm": "SHA-256",
-        "vc.supported_credential_types": "oid4vc_natural_person",
-        "vc.format": "jwt_vc_json",
-        "vc.binding_required_proof_types": "attestation,jwt",
-        "include.in.token.scope": "true",
-        "vc.display": "[{\"name\":\"Natural person verifiable credential\",\"locale\":\"en\"}]",
-        "vc.cryptographic_binding_methods_supported": "jwk",
-        "vc.expiry_in_seconds": "31536000",
-        "vc.include_in_metadata": "true",
-        "vc.verifiable_credential_type": "oid4vc_natural_person",
-        "vc.binding_required": "true",
-        "vc.credential_build_config.token_jws_type": "vc+jwt",
-        "consent.screen.text": "${naturalPersonScopeConsentText}",
-        "display.on.consent.screen": "true"
-      },
-      "protocolMappers": [
-        {
-          "id": "3884901a-5971-4bb9-8a0f-5b67f0a2389b",
-          "name": "last-name",
-          "protocol": "oid4vc",
-          "protocolMapper": "oid4vc-user-attribute-mapper",
-          "consentRequired": false,
-          "config": {
-            "claim.name": "familyName",
-            "userAttribute": "lastName",
-            "aggregateAttributes": "false"
-          }
-        },
-        {
-          "id": "3448b2d3-a50b-4edc-b2b7-168adebfcb5e",
-          "name": "subject-id",
-          "protocol": "oid4vc",
-          "protocolMapper": "oid4vc-subject-id-mapper",
-          "consentRequired": false,
-          "config": {
-            "claim.name": "id",
-            "userAttribute": "username"
-          }
-        },
-        {
-          "id": "856e9c0c-869b-414e-846f-67e484534246",
-          "name": "email",
-          "protocol": "oid4vc",
-          "protocolMapper": "oid4vc-user-attribute-mapper",
-          "consentRequired": false,
-          "config": {
-            "claim.name": "email",
-            "userAttribute": "email",
-            "aggregateAttributes": "false"
-          }
-        },
-        {
-          "id": "19af5a29-21d1-4df7-b1e1-88d6b1f0571e",
-          "name": "first-name",
-          "protocol": "oid4vc",
-          "protocolMapper": "oid4vc-user-attribute-mapper",
-          "consentRequired": false,
-          "config": {
-            "claim.name": "firstName",
-            "userAttribute": "firstName",
-            "aggregateAttributes": "false"
           }
         }
       ]
@@ -958,81 +903,6 @@
             "access.token.claim": "true",
             "claim.name": "may_act.sub",
             "jsonType.label": "String"
-          }
-        }
-      ]
-    },
-    {
-      "id": "5b7960e0-8bef-4662-a751-c48f0af73946",
-      "name": "oid4vc_natural_person_sd",
-      "description": "OID4VCI credential scope that represents a natural person in format: dc+sd-jwt",
-      "protocol": "oid4vc",
-      "attributes": {
-        "vc.credential_configuration_id": "oid4vc_natural_person_sd",
-        "vc.credential_contexts": "oid4vc_natural_person",
-        "vc.credential_build_config.sd_jwt.visible_claims": "id,iat,nbf,exp,jti",
-        "vc.credential_build_config.hash_algorithm": "SHA-256",
-        "vc.supported_credential_types": "oid4vc_natural_person",
-        "vc.format": "dc+sd-jwt",
-        "vc.binding_required_proof_types": "attestation,jwt",
-        "include.in.token.scope": "true",
-        "vc.display": "[{\"name\":\"Natural person verifiable credential\",\"locale\":\"en\"}]",
-        "vc.cryptographic_binding_methods_supported": "jwk",
-        "vc.expiry_in_seconds": "31536000",
-        "vc.include_in_metadata": "true",
-        "vc.verifiable_credential_type": "oid4vc_natural_person",
-        "vc.binding_required": "true",
-        "vc.credential_build_config.token_jws_type": "dc+sd-jwt",
-        "consent.screen.text": "${naturalPersonScopeConsentText}",
-        "display.on.consent.screen": "true",
-        "vc.sd_jwt.number_of_decoys": "10"
-      },
-      "protocolMappers": [
-        {
-          "id": "03a56419-60f7-4728-abb3-e6dc996904e3",
-          "name": "first-name",
-          "protocol": "oid4vc",
-          "protocolMapper": "oid4vc-user-attribute-mapper",
-          "consentRequired": false,
-          "config": {
-            "claim.name": "firstName",
-            "userAttribute": "firstName",
-            "aggregateAttributes": "false"
-          }
-        },
-        {
-          "id": "9f643093-29fc-4037-b050-a4a858703d31",
-          "name": "last-name",
-          "protocol": "oid4vc",
-          "protocolMapper": "oid4vc-user-attribute-mapper",
-          "consentRequired": false,
-          "config": {
-            "claim.name": "familyName",
-            "userAttribute": "lastName",
-            "aggregateAttributes": "false"
-          }
-        },
-        {
-          "id": "26a603af-31a2-45b1-a8bb-799de4201abc",
-          "name": "email",
-          "protocol": "oid4vc",
-          "protocolMapper": "oid4vc-user-attribute-mapper",
-          "consentRequired": false,
-          "config": {
-            "claim.name": "email",
-            "userAttribute": "email",
-            "aggregateAttributes": "false"
-          }
-        },
-        {
-          "id": "ad4c3787-5ce9-4d71-9df7-fe8cb6762165",
-          "name": "subject-id",
-          "protocol": "oid4vc",
-          "protocolMapper": "oid4vc-subject-id-mapper",
-          "consentRequired": false,
-          "config": {
-            "claim.name": "id",
-            "userAttribute": "username"
           }
         }
       ]

@@ -1,0 +1,438 @@
+{
+  "allowRemoteResourceManagement": true,
+  "policyEnforcementMode": "ENFORCING",
+  "resources": [
+    {
+      "name": "user",
+      "type": "user",
+      "ownerManagedAccess": false,
+      "displayName": "User",
+      "attributes": {},
+      "uris": [],
+      "scopes": [
+        {
+          "name": "read"
+        },
+        {
+          "name": "update"
+        },
+        {
+          "name": "delete"
+        },
+        {
+          "name": "create"
+        },
+        {
+          "name": "list"
+        }
+      ],
+      "icon_uri": ""
+    },
+    {
+      "name": "profile",
+      "type": "profile",
+      "ownerManagedAccess": false,
+      "displayName": "Profile",
+      "attributes": {},
+      "uris": [],
+      "scopes": [
+        {
+          "name": "read"
+        },
+        {
+          "name": "update"
+        }
+      ],
+      "icon_uri": ""
+    },
+    {
+      "name": "report",
+      "type": "report",
+      "ownerManagedAccess": false,
+      "displayName": "Report",
+      "attributes": {},
+      "uris": [],
+      "scopes": [
+        {
+          "name": "read"
+        },
+        {
+          "name": "update"
+        },
+        {
+          "name": "create"
+        },
+        {
+          "name": "list"
+        }
+      ],
+      "icon_uri": ""
+    },
+    {
+      "name": "activity",
+      "type": "activity",
+      "ownerManagedAccess": false,
+      "displayName": "Activity",
+      "attributes": {},
+      "uris": [],
+      "scopes": [
+        {
+          "name": "read"
+        },
+        {
+          "name": "create"
+        }
+      ],
+      "icon_uri": ""
+    },
+    {
+      "name": "attachment",
+      "type": "attachment",
+      "ownerManagedAccess": false,
+      "displayName": "Attachment",
+      "attributes": {},
+      "uris": [],
+      "scopes": [
+        {
+          "name": "read"
+        },
+        {
+          "name": "delete"
+        },
+        {
+          "name": "create"
+        }
+      ],
+      "icon_uri": ""
+    },
+    {
+      "name": "post",
+      "type": "post",
+      "ownerManagedAccess": false,
+      "displayName": "Post",
+      "attributes": {},
+      "uris": [],
+      "scopes": [
+        {
+          "name": "read"
+        },
+        {
+          "name": "update"
+        },
+        {
+          "name": "delete"
+        },
+        {
+          "name": "create"
+        },
+        {
+          "name": "list"
+        }
+      ],
+      "icon_uri": ""
+    }
+  ],
+  "policies": [
+    {
+      "name": "ADMIN Role policy",
+      "description": "ADMIN Role policy",
+      "type": "role",
+      "logic": "POSITIVE",
+      "decisionStrategy": "UNANIMOUS",
+      "config": {
+        "fetchRoles": "true",
+        "roles": "[{\"id\":\"ADMIN\",\"required\":false}]"
+      }
+    },
+    {
+      "name": "STUDENT role policy",
+      "description": "STUDENT role policy",
+      "type": "role",
+      "logic": "POSITIVE",
+      "decisionStrategy": "UNANIMOUS",
+      "config": {
+        "fetchRoles": "true",
+        "roles": "[{\"id\":\"STUDENT\",\"required\":false}]"
+      }
+    },
+    {
+      "name": "GUEST Role policy",
+      "description": "GUEST Role policy",
+      "type": "role",
+      "logic": "POSITIVE",
+      "decisionStrategy": "UNANIMOUS",
+      "config": {
+        "fetchRoles": "false",
+        "roles": "[{\"id\":\"GUEST\",\"required\":true}]"
+      }
+    },
+    {
+      "name": "report:create",
+      "description": "report:create",
+      "type": "scope",
+      "logic": "POSITIVE",
+      "decisionStrategy": "AFFIRMATIVE",
+      "config": {
+        "resources": "[\"report\"]",
+        "scopes": "[\"create\"]",
+        "applyPolicies": "[\"ADMIN Role policy\",\"GUEST Role policy\",\"STUDENT role policy\"]"
+      }
+    },
+    {
+      "name": "report:read",
+      "description": "report:read",
+      "type": "scope",
+      "logic": "POSITIVE",
+      "decisionStrategy": "AFFIRMATIVE",
+      "config": {
+        "resources": "[\"report\"]",
+        "scopes": "[\"read\"]",
+        "applyPolicies": "[\"ADMIN Role policy\",\"GUEST Role policy\",\"STUDENT role policy\"]"
+      }
+    },
+    {
+      "name": "activity:read",
+      "description": "activity:read",
+      "type": "scope",
+      "logic": "POSITIVE",
+      "decisionStrategy": "AFFIRMATIVE",
+      "config": {
+        "resources": "[\"activity\"]",
+        "scopes": "[\"read\"]",
+        "applyPolicies": "[\"ADMIN Role policy\",\"STUDENT role policy\"]"
+      }
+    },
+    {
+      "name": "activity:create",
+      "description": "activity:create",
+      "type": "scope",
+      "logic": "POSITIVE",
+      "decisionStrategy": "AFFIRMATIVE",
+      "config": {
+        "resources": "[\"activity\"]",
+        "scopes": "[\"create\"]",
+        "applyPolicies": "[\"ADMIN Role policy\",\"STUDENT role policy\"]"
+      }
+    },
+    {
+      "name": "post:read",
+      "description": "post:read",
+      "type": "scope",
+      "logic": "POSITIVE",
+      "decisionStrategy": "AFFIRMATIVE",
+      "config": {
+        "resources": "[\"post\"]",
+        "scopes": "[\"read\"]",
+        "applyPolicies": "[\"ADMIN Role policy\",\"STUDENT role policy\"]"
+      }
+    },
+    {
+      "name": "post:read:draft",
+      "description": "post:read:draft",
+      "type": "scope",
+      "logic": "POSITIVE",
+      "decisionStrategy": "UNANIMOUS",
+      "config": {
+        "resources": "[\"post\"]",
+        "scopes": "[\"read\"]",
+        "applyPolicies": "[\"ADMIN Role policy\"]"
+      }
+    },
+    {
+      "name": "post:create",
+      "description": "post:create",
+      "type": "scope",
+      "logic": "POSITIVE",
+      "decisionStrategy": "UNANIMOUS",
+      "config": {
+        "resources": "[\"post\"]",
+        "scopes": "[\"create\"]",
+        "applyPolicies": "[\"ADMIN Role policy\"]"
+      }
+    },
+    {
+      "name": "post:update",
+      "description": "post:update",
+      "type": "scope",
+      "logic": "POSITIVE",
+      "decisionStrategy": "UNANIMOUS",
+      "config": {
+        "resources": "[\"post\"]",
+        "scopes": "[\"update\"]",
+        "applyPolicies": "[\"ADMIN Role policy\"]"
+      }
+    },
+    {
+      "name": "post:delete",
+      "description": "post:delete",
+      "type": "scope",
+      "logic": "POSITIVE",
+      "decisionStrategy": "UNANIMOUS",
+      "config": {
+        "resources": "[\"post\"]",
+        "scopes": "[\"delete\"]",
+        "applyPolicies": "[\"ADMIN Role policy\"]"
+      }
+    },
+    {
+      "name": "attachment:create",
+      "description": "attachment:create",
+      "type": "scope",
+      "logic": "POSITIVE",
+      "decisionStrategy": "UNANIMOUS",
+      "config": {
+        "resources": "[\"attachment\"]",
+        "scopes": "[\"create\"]",
+        "applyPolicies": "[\"ADMIN Role policy\"]"
+      }
+    },
+    {
+      "name": "attachment:delete",
+      "description": "attachment:delete",
+      "type": "scope",
+      "logic": "POSITIVE",
+      "decisionStrategy": "UNANIMOUS",
+      "config": {
+        "resources": "[\"attachment\"]",
+        "scopes": "[\"delete\"]",
+        "applyPolicies": "[\"ADMIN Role policy\"]"
+      }
+    },
+    {
+      "name": "user:list",
+      "description": "user:list",
+      "type": "scope",
+      "logic": "POSITIVE",
+      "decisionStrategy": "UNANIMOUS",
+      "config": {
+        "resources": "[\"user\"]",
+        "scopes": "[\"list\"]",
+        "applyPolicies": "[\"ADMIN Role policy\"]"
+      }
+    },
+    {
+      "name": "user:read",
+      "description": "user:read",
+      "type": "scope",
+      "logic": "POSITIVE",
+      "decisionStrategy": "UNANIMOUS",
+      "config": {
+        "resources": "[\"user\"]",
+        "scopes": "[\"read\"]",
+        "applyPolicies": "[\"ADMIN Role policy\"]"
+      }
+    },
+    {
+      "name": "user:update",
+      "description": "user:update",
+      "type": "scope",
+      "logic": "POSITIVE",
+      "decisionStrategy": "UNANIMOUS",
+      "config": {
+        "resources": "[\"user\"]",
+        "scopes": "[\"update\"]",
+        "applyPolicies": "[\"ADMIN Role policy\"]"
+      }
+    },
+    {
+      "name": "user:role:update",
+      "description": "user:role:update",
+      "type": "scope",
+      "logic": "POSITIVE",
+      "decisionStrategy": "UNANIMOUS",
+      "config": {
+        "resources": "[\"user\"]",
+        "scopes": "[\"update\"]",
+        "applyPolicies": "[\"ADMIN Role policy\"]"
+      }
+    },
+    {
+      "name": "user:delete",
+      "description": "user:delete",
+      "type": "scope",
+      "logic": "POSITIVE",
+      "decisionStrategy": "UNANIMOUS",
+      "config": {
+        "resources": "[\"user\"]",
+        "scopes": "[\"delete\"]",
+        "applyPolicies": "[\"ADMIN Role policy\"]"
+      }
+    },
+    {
+      "name": "report:status:update",
+      "description": "report:status:update",
+      "type": "scope",
+      "logic": "POSITIVE",
+      "decisionStrategy": "UNANIMOUS",
+      "config": {
+        "resources": "[\"report\"]",
+        "scopes": "[\"update\"]",
+        "applyPolicies": "[\"ADMIN Role policy\"]"
+      }
+    },
+    {
+      "name": "report:notify",
+      "description": "report:notify",
+      "type": "scope",
+      "logic": "POSITIVE",
+      "decisionStrategy": "UNANIMOUS",
+      "config": {
+        "resources": "[\"report\"]",
+        "scopes": "[\"read\"]",
+        "applyPolicies": "[\"ADMIN Role policy\"]"
+      }
+    },
+    {
+      "name": "attachment:read",
+      "description": "attachment:read",
+      "type": "scope",
+      "logic": "POSITIVE",
+      "decisionStrategy": "AFFIRMATIVE",
+      "config": {
+        "resources": "[\"attachment\"]",
+        "scopes": "[\"read\"]",
+        "applyPolicies": "[\"ADMIN Role policy\",\"STUDENT role policy\"]"
+      }
+    },
+    {
+      "name": "user:create",
+      "description": "user:create",
+      "type": "scope",
+      "logic": "POSITIVE",
+      "decisionStrategy": "UNANIMOUS",
+      "config": {
+        "resources": "[\"user\"]",
+        "scopes": "[\"create\"]",
+        "applyPolicies": "[\"ADMIN Role policy\"]"
+      }
+    }
+  ],
+  "scopes": [
+    {
+      "name": "create",
+      "iconUri": "",
+      "displayName": "Create"
+    },
+    {
+      "name": "read",
+      "iconUri": "",
+      "displayName": "Read"
+    },
+    {
+      "name": "update",
+      "iconUri": "",
+      "displayName": "Update"
+    },
+    {
+      "name": "delete",
+      "iconUri": "",
+      "displayName": "Delete"
+    },
+    {
+      "name": "list",
+      "iconUri": "",
+      "displayName": "List"
+    }
+  ],
+  "decisionStrategy": "AFFIRMATIVE"
+}

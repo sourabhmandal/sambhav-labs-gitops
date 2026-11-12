@@ -1,7 +1,7 @@
 {
-  "clientId": "aitp-login-authz",
-  "name": "AITP Authorization",
-  "description": "AITP Authorization Client",
+  "clientId": "campusbook-authz",
+  "name": "Campusbook Authorization",
+  "description": "Campusbook Authorization Client",
   "rootUrl": "",
   "adminUrl": "",
   "baseUrl": "",

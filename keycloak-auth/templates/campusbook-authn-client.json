@@ -1,7 +1,7 @@
 {
-  "clientId": "aitp-login",
-  "name": "AIT Pune Login",
-  "description": "AIT Pune Login",
+  "clientId": "campusbook-authn",
+  "name": "Campusbook Authn",
+  "description": "Campusbook Authn",
   "rootUrl": "http:://localhost:3000/",
   "adminUrl": "http:://localhost:3000/",
   "baseUrl": "http:://localhost:3000/",
