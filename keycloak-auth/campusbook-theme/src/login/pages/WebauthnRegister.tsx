@@ -35,30 +35,17 @@ export default function WebauthnRegister(props: PageProps<Extract<KcContext, { p
                     <div className="flex items-center justify-center h-16 w-16 rounded-full bg-primary/10 text-primary border border-primary/20">
                         <Fingerprint className="h-8 w-8" />
                     </div>
-                    <p className="text-xs text-muted-foreground">
-                        Register a passkey or biometric security key to sign in faster and more securely
-                    </p>
+                    <p className="text-xs text-muted-foreground">Register a passkey or biometric security key to sign in faster and more securely</p>
                 </div>
 
-                <Button
-                    id={authButtonId}
-                    type="button"
-                    className="w-full"
-                    autoFocus
-                >
+                <Button id={authButtonId} type="button" className="w-full" autoFocus>
                     <Fingerprint className="h-4 w-4 mr-2" />
                     {msgStr("doRegisterSecurityKey")}
                 </Button>
 
                 {!isSetRetry && isAppInitiatedAction && (
                     <form action={url.loginAction} method="post" className="w-full">
-                        <Button
-                            type="submit"
-                            name="cancel-aia"
-                            value="true"
-                            variant="ghost"
-                            className="w-full text-xs"
-                        >
+                        <Button type="submit" name="cancel-aia" value="true" variant="ghost" className="w-full text-xs">
                             {msgStr("doCancel")}
                         </Button>
                     </form>

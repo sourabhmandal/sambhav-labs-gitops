@@ -30,12 +30,8 @@ export default function LoginVerifyEmail(props: PageProps<Extract<KcContext, { p
                 <div className="flex items-center justify-center h-14 w-14 rounded-full bg-primary/10 text-primary border border-primary/20">
                     <Mail className="h-7 w-7" />
                 </div>
-                <p className="text-sm text-foreground/90 font-medium">
-                    {msg("emailVerifyInstruction1", user?.email ?? "")}
-                </p>
-                <p className="text-xs text-muted-foreground leading-relaxed">
-                    {msg("emailVerifyInstruction2")}
-                </p>
+                <p className="text-sm text-foreground/90 font-medium">{msg("emailVerifyInstruction1", user?.email ?? "")}</p>
+                <p className="text-xs text-muted-foreground leading-relaxed">{msg("emailVerifyInstruction2")}</p>
                 <div className="w-full pt-2">
                     <a href={url.loginAction} className="w-full block">
                         <Button variant="outline" className="w-full">

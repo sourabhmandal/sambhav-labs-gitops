@@ -12,13 +12,7 @@ export default function Terms(props: PageProps<Extract<KcContext, { pageId: "ter
     const [isSubmitting, setIsSubmitting] = useState(false);
 
     return (
-        <Template
-            kcContext={kcContext}
-            i18n={i18n}
-            doUseDefaultCss={doUseDefaultCss}
-            classes={classes}
-            headerNode={msg("termsTitle")}
-        >
+        <Template kcContext={kcContext} i18n={i18n} doUseDefaultCss={doUseDefaultCss} classes={classes} headerNode={msg("termsTitle")}>
             <div className="space-y-4">
                 <div className="flex items-center gap-2 text-xs font-medium text-foreground">
                     <ScrollText className="h-4 w-4 text-primary" />
@@ -29,26 +23,11 @@ export default function Terms(props: PageProps<Extract<KcContext, { pageId: "ter
                     {msg("termsText")}
                 </div>
 
-                <form
-                    action={url.loginAction}
-                    method="post"
-                    onSubmit={() => setIsSubmitting(true)}
-                    className="flex items-center gap-3 pt-2"
-                >
-                    <Button
-                        type="submit"
-                        name="accept"
-                        className="w-full"
-                        isLoading={isSubmitting}
-                    >
+                <form action={url.loginAction} method="post" onSubmit={() => setIsSubmitting(true)} className="flex items-center gap-3 pt-2">
+                    <Button type="submit" name="accept" className="w-full" isLoading={isSubmitting}>
                         {msgStr("doAccept")}
                     </Button>
-                    <Button
-                        type="submit"
-                        name="cancel"
-                        variant="outline"
-                        className="w-full"
-                    >
+                    <Button type="submit" name="cancel" variant="outline" className="w-full">
                         {msgStr("doDecline")}
                     </Button>
                 </form>

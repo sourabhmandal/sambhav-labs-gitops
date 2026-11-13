@@ -43,9 +43,7 @@ export default function LoginUsername(props: PageProps<Extract<KcContext, { page
                                     <div className="w-full border-t border-border/70" />
                                 </div>
                                 <div className="relative flex justify-center text-xs uppercase">
-                                    <span className="bg-card px-2 text-muted-foreground">
-                                        or continue with credentials
-                                    </span>
+                                    <span className="bg-card px-2 text-muted-foreground">or continue with credentials</span>
                                 </div>
                             </div>
                         )}
@@ -53,13 +51,7 @@ export default function LoginUsername(props: PageProps<Extract<KcContext, { page
                 ) : null
             }
         >
-            <form
-                id="kc-form-login"
-                action={url.loginAction}
-                method="post"
-                onSubmit={() => setIsSubmitting(true)}
-                className="space-y-4"
-            >
+            <form id="kc-form-login" action={url.loginAction} method="post" onSubmit={() => setIsSubmitting(true)} className="space-y-4">
                 <Input
                     id="username"
                     name="username"
@@ -80,20 +72,13 @@ export default function LoginUsername(props: PageProps<Extract<KcContext, { page
 
                 <div className="flex items-center justify-between text-xs">
                     {realm.resetPasswordAllowed && (
-                        <a
-                            href={url.loginResetCredentialsUrl}
-                            className="font-medium text-primary hover:underline ml-auto"
-                        >
+                        <a href={url.loginResetCredentialsUrl} className="font-medium text-primary hover:underline ml-auto">
                             {msg("doForgotPassword")}
                         </a>
                     )}
                 </div>
 
-                <Button
-                    type="submit"
-                    className="w-full mt-2"
-                    isLoading={isSubmitting}
-                >
+                <Button type="submit" className="w-full mt-2" isLoading={isSubmitting}>
                     {msgStr("doLogIn")}
                 </Button>
             </form>

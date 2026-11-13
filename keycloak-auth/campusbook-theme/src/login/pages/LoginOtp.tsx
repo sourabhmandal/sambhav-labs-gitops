@@ -25,18 +25,10 @@ export default function LoginOtp(props: PageProps<Extract<KcContext, { pageId: "
                 <div className="flex items-center justify-center h-12 w-12 rounded-full bg-primary/10 text-primary border border-primary/20 mb-2">
                     <KeyRound className="h-6 w-6" />
                 </div>
-                <p className="text-xs text-muted-foreground text-center">
-                    Enter the code from your authenticator application
-                </p>
+                <p className="text-xs text-muted-foreground text-center">Enter the code from your authenticator application</p>
             </div>
 
-            <form
-                id="kc-otp-login-form"
-                action={url.loginAction}
-                method="post"
-                onSubmit={() => setIsSubmitting(true)}
-                className="space-y-4"
-            >
+            <form id="kc-otp-login-form" action={url.loginAction} method="post" onSubmit={() => setIsSubmitting(true)} className="space-y-4">
                 {otpLogin.userOtpCredentials.length > 1 && (
                     <div className="space-y-1.5 text-xs">
                         <label className="text-muted-foreground font-medium">Select Device</label>
@@ -72,11 +64,7 @@ export default function LoginOtp(props: PageProps<Extract<KcContext, { pageId: "
                     error={messagesPerField.get("totp")}
                 />
 
-                <Button
-                    type="submit"
-                    className="w-full mt-2"
-                    isLoading={isSubmitting}
-                >
+                <Button type="submit" className="w-full mt-2" isLoading={isSubmitting}>
                     {msgStr("doLogIn")}
                 </Button>
             </form>

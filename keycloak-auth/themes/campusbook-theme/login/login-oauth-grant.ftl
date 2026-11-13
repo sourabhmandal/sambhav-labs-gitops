@@ -902,8 +902,25 @@ function decodeHtmlEntities(htmlStr){
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <link rel="icon" type="image/png" sizes="32x32" href="${xKeycloakify.resourcesPath}/dist/favicon-32x32.png">
-      <script type="module" crossorigin="" src="${xKeycloakify.resourcesPath}/dist/assets/index-Co4JXCdt.js"></script>
-      <link rel="stylesheet" crossorigin="" href="${xKeycloakify.resourcesPath}/dist/assets/index-CoeUdLZU.css">
+        <script>
+            (function () {
+                try {
+                    var theme = localStorage.getItem("theme");
+                    var supportDark =
+                        window.matchMedia &&
+                        window.matchMedia("(prefers-color-scheme: dark)").matches;
+                    if (theme === "dark" || (!theme && supportDark)) {
+                        document.documentElement.classList.add("dark");
+                        document.documentElement.classList.remove("light");
+                    } else {
+                        document.documentElement.classList.remove("dark");
+                        document.documentElement.classList.add("light");
+                    }
+                } catch (e) {}
+            })();
+        </script>
+      <script type="module" crossorigin="" src="${xKeycloakify.resourcesPath}/dist/assets/index-CCvJvi2y.js"></script>
+      <link rel="stylesheet" crossorigin="" href="${xKeycloakify.resourcesPath}/dist/assets/index-vled90y4.css">
     </head>
 
     <body>

@@ -44,17 +44,10 @@ export default function WebauthnAuthenticate(props: PageProps<Extract<KcContext,
                     <div className="flex items-center justify-center h-16 w-16 rounded-full bg-primary/10 text-primary border border-primary/20 animate-pulse">
                         <Fingerprint className="h-8 w-8" />
                     </div>
-                    <p className="text-xs text-muted-foreground">
-                        Use your security key, biometric passkey, or device screen lock
-                    </p>
+                    <p className="text-xs text-muted-foreground">Use your security key, biometric passkey, or device screen lock</p>
                 </div>
 
-                <Button
-                    id={authButtonId}
-                    type="button"
-                    className="w-full"
-                    autoFocus
-                >
+                <Button id={authButtonId} type="button" className="w-full" autoFocus>
                     <Fingerprint className="h-4 w-4 mr-2" />
                     {msgStr("webauthn-doAuthenticate")}
                 </Button>
@@ -62,8 +55,11 @@ export default function WebauthnAuthenticate(props: PageProps<Extract<KcContext,
                 {shouldDisplayAuthenticators && authenticators && (
                     <div className="mt-4 pt-3 border-t border-border/60 text-left text-xs space-y-2">
                         <span className="font-medium text-muted-foreground">Available credentials:</span>
-                        {authenticators.authenticators.map((auth) => (
-                            <div key={auth.credentialId} className="p-2 rounded-lg bg-muted/40 border border-border/80 flex items-center justify-between">
+                        {authenticators.authenticators.map(auth => (
+                            <div
+                                key={auth.credentialId}
+                                className="p-2 rounded-lg bg-muted/40 border border-border/80 flex items-center justify-between"
+                            >
                                 <span className="font-medium text-foreground">{advancedMsg(auth.label)}</span>
                                 <span className="text-muted-foreground text-[10px]">{auth.createdAt}</span>
                             </div>

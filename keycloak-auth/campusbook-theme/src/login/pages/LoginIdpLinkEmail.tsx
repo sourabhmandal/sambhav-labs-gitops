@@ -24,9 +24,7 @@ export default function LoginIdpLinkEmail(props: PageProps<Extract<KcContext, { 
                 <p className="text-sm font-medium text-foreground">
                     {msg("emailLinkIdp1", idpAlias, brokerContext.username, realm.displayName || realm.name)}
                 </p>
-                <p className="text-xs text-muted-foreground">
-                    {msg("emailLinkIdp2")}
-                </p>
+                <p className="text-xs text-muted-foreground">{msg("emailLinkIdp2")}</p>
 
                 <div className="w-full pt-2">
                     <a href={url.loginAction} className="w-full block">

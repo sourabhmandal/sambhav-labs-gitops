@@ -12,34 +12,15 @@ export default function LogoutConfirm(props: PageProps<Extract<KcContext, { page
     const [isSubmitting, setIsSubmitting] = useState(false);
 
     return (
-        <Template
-            kcContext={kcContext}
-            i18n={i18n}
-            doUseDefaultCss={doUseDefaultCss}
-            classes={classes}
-            headerNode={msg("logoutConfirmTitle")}
-        >
+        <Template kcContext={kcContext} i18n={i18n} doUseDefaultCss={doUseDefaultCss} classes={classes} headerNode={msg("logoutConfirmTitle")}>
             <div className="flex flex-col items-center text-center space-y-4 my-2">
                 <div className="flex items-center justify-center h-12 w-12 rounded-full bg-destructive/10 text-destructive border border-destructive/20">
                     <LogOut className="h-6 w-6" />
                 </div>
-                <p className="text-xs text-muted-foreground leading-relaxed">
-                    {msg("logoutConfirmHeader")}
-                </p>
+                <p className="text-xs text-muted-foreground leading-relaxed">{msg("logoutConfirmHeader")}</p>
 
-                <form
-                    action={url.logoutConfirmAction}
-                    method="post"
-                    onSubmit={() => setIsSubmitting(true)}
-                    className="w-full space-y-3 pt-2"
-                >
-                    <Button
-                        type="submit"
-                        name="confirmLogout"
-                        variant="destructive"
-                        className="w-full"
-                        isLoading={isSubmitting}
-                    >
+                <form action={url.logoutConfirmAction} method="post" onSubmit={() => setIsSubmitting(true)} className="w-full space-y-3 pt-2">
+                    <Button type="submit" name="confirmLogout" variant="destructive" className="w-full" isLoading={isSubmitting}>
                         {msgStr("doLogout")}
                     </Button>
 

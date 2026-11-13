@@ -23,31 +23,13 @@ export default function DeleteCredential(props: PageProps<Extract<KcContext, { p
                 <div className="flex items-center justify-center h-12 w-12 rounded-full bg-destructive/10 text-destructive border border-destructive/20">
                     <Trash2 className="h-6 w-6" />
                 </div>
-                <p className="text-xs text-muted-foreground leading-relaxed">
-                    {msg("deleteCredentialMessage", credentialLabel)}
-                </p>
+                <p className="text-xs text-muted-foreground leading-relaxed">{msg("deleteCredentialMessage", credentialLabel)}</p>
 
-                <form
-                    action={url.loginAction}
-                    method="post"
-                    onSubmit={() => setIsSubmitting(true)}
-                    className="w-full flex items-center gap-3 pt-2"
-                >
-                    <Button
-                        type="submit"
-                        name="accept"
-                        variant="destructive"
-                        className="w-full"
-                        isLoading={isSubmitting}
-                    >
+                <form action={url.loginAction} method="post" onSubmit={() => setIsSubmitting(true)} className="w-full flex items-center gap-3 pt-2">
+                    <Button type="submit" name="accept" variant="destructive" className="w-full" isLoading={isSubmitting}>
                         {msgStr("doAccept")}
                     </Button>
-                    <Button
-                        type="submit"
-                        name="cancel"
-                        variant="outline"
-                        className="w-full"
-                    >
+                    <Button type="submit" name="cancel" variant="outline" className="w-full">
                         {msgStr("doDecline")}
                     </Button>
                 </form>

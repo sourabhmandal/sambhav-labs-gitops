@@ -35,7 +35,11 @@ function getProviderIcon(alias: string) {
     }
     if (normalized.includes("github")) {
         return (
-            <svg className="h-4 w-4 mr-2 fill-current" viewBox="0 0 24 24" aria-hidden="true">
+            <svg
+                className="h-4 w-4 mr-2 fill-current"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+            >
                 <path
                     fillRule="evenodd"
                     clipRule="evenodd"
@@ -52,7 +56,7 @@ export const SocialProviders: React.FC<SocialProvidersProps> = ({ providers }) =
 
     return (
         <div className="flex flex-col gap-2.5 w-full my-4">
-            {providers.map((p) => (
+            {providers.map(p => (
                 <a key={p.alias} href={p.loginUrl} className="w-full">
                     <Button
                         type="button"

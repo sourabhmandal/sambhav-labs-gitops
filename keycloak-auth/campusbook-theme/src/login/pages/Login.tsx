@@ -10,16 +10,7 @@ import { useScript } from "keycloakify/login/pages/Login.useScript";
 export default function Login(props: PageProps<Extract<KcContext, { pageId: "login.ftl" }>, I18n>) {
     const { kcContext, i18n, doUseDefaultCss = false, Template, classes } = props;
 
-    const {
-        social,
-        realm,
-        url,
-        usernameHidden,
-        login,
-        auth,
-        registrationDisabled,
-        messagesPerField
-    } = kcContext;
+    const { social, realm, url, usernameHidden, login, auth, registrationDisabled, messagesPerField } = kcContext;
 
     const { msg, msgStr } = i18n;
     const [isSubmitting, setIsSubmitting] = useState(false);
@@ -41,10 +32,7 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
             infoNode={
                 <span>
                     {msg("noAccount")}{" "}
-                    <a
-                        href={url.registrationUrl}
-                        className="font-medium text-primary hover:underline transition-colors"
-                    >
+                    <a href={url.registrationUrl} className="font-medium text-primary hover:underline transition-colors">
                         {msg("doRegister")}
                     </a>
                 </span>
@@ -59,9 +47,7 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
                                     <div className="w-full border-t border-border/70" />
                                 </div>
                                 <div className="relative flex justify-center text-xs uppercase">
-                                    <span className="bg-card px-2 text-muted-foreground">
-                                        or continue with credentials
-                                    </span>
+                                    <span className="bg-card px-2 text-muted-foreground">or continue with credentials</span>
                                 </div>
                             </div>
                         )}
@@ -70,13 +56,7 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
             }
         >
             {realm.password && (
-                <form
-                    id="kc-form-login"
-                    onSubmit={() => setIsSubmitting(true)}
-                    action={url.loginAction}
-                    method="post"
-                    className="space-y-4"
-                >
+                <form id="kc-form-login" onSubmit={() => setIsSubmitting(true)} action={url.loginAction} method="post" className="space-y-4">
                     {!usernameHidden && (
                         <Input
                             id="username"
@@ -123,10 +103,7 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
                         )}
 
                         {realm.resetPasswordAllowed && (
-                            <a
-                                href={url.loginResetCredentialsUrl}
-                                className="font-medium text-primary hover:underline ml-auto"
-                            >
+                            <a href={url.loginResetCredentialsUrl} className="font-medium text-primary hover:underline ml-auto">
                                 {msg("doForgotPassword")}
                             </a>
                         )}
@@ -134,11 +111,7 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
 
                     <input type="hidden" id="id-hidden-input" name="credentialId" value={auth.selectedCredential} />
 
-                    <Button
-                        type="submit"
-                        className="w-full mt-2"
-                        isLoading={isSubmitting}
-                    >
+                    <Button type="submit" className="w-full mt-2" isLoading={isSubmitting}>
                         {msgStr("doLogIn")}
                     </Button>
                 </form>

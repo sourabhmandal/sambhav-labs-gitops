@@ -3,6 +3,7 @@ import { useState } from "react";
 import type { LazyOrNot } from "keycloakify/tools/LazyOrNot";
 import type { UserProfileFormFieldsProps } from "keycloakify/login/UserProfileFormFieldsProps";
 import type { PageProps } from "keycloakify/login/pages/PageProps";
+import { getKcClsx } from "keycloakify/login/lib/kcClsx";
 import type { KcContext } from "../KcContext";
 import type { I18n } from "../i18n";
 import { Button } from "../components/Button";
@@ -17,6 +18,11 @@ export default function Register(props: RegisterProps) {
     const { url, messagesPerField } = kcContext;
     const { msg, msgStr } = i18n;
     const [isFormSubmittable, setIsFormSubmittable] = useState(false);
+
+    const { kcClsx } = getKcClsx({
+        doUseDefaultCss,
+        classes
+    });
 
     return (
         <Template
@@ -41,15 +47,11 @@ export default function Register(props: RegisterProps) {
                 <UserProfileFormFields
                     kcContext={kcContext}
                     i18n={i18n}
-                    kcClsx={() => ""}
+                    kcClsx={kcClsx}
                     onIsFormSubmittableValueChange={setIsFormSubmittable}
                     doMakeUserConfirmPassword={doMakeUserConfirmPassword}
                 />
-                <Button
-                    type="submit"
-                    className="w-full mt-2"
-                    disabled={!isFormSubmittable}
-                >
+                <Button type="submit" className="w-full mt-2" disabled={!isFormSubmittable}>
                     {msgStr("doRegister")}
                 </Button>
             </form>

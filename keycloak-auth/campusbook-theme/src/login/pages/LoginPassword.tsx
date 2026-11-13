@@ -24,13 +24,7 @@ export default function LoginPassword(props: PageProps<Extract<KcContext, { page
             displayMessage={!messagesPerField.existsError("password")}
             headerNode={msg("doLogIn")}
         >
-            <form
-                id="kc-form-login"
-                action={url.loginAction}
-                method="post"
-                onSubmit={() => setIsSubmitting(true)}
-                className="space-y-4"
-            >
+            <form id="kc-form-login" action={url.loginAction} method="post" onSubmit={() => setIsSubmitting(true)} className="space-y-4">
                 <Input
                     id="password"
                     name="password"
@@ -45,20 +39,13 @@ export default function LoginPassword(props: PageProps<Extract<KcContext, { page
 
                 <div className="flex items-center justify-between text-xs">
                     {realm.resetPasswordAllowed && (
-                        <a
-                            href={url.loginResetCredentialsUrl}
-                            className="font-medium text-primary hover:underline ml-auto"
-                        >
+                        <a href={url.loginResetCredentialsUrl} className="font-medium text-primary hover:underline ml-auto">
                             {msg("doForgotPassword")}
                         </a>
                     )}
                 </div>
 
-                <Button
-                    type="submit"
-                    className="w-full mt-2"
-                    isLoading={isSubmitting}
-                >
+                <Button type="submit" className="w-full mt-2" isLoading={isSubmitting}>
                     {msgStr("doLogIn")}
                 </Button>
             </form>

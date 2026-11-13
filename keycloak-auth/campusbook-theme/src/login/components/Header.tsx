@@ -4,19 +4,24 @@ import { BookOpen } from "lucide-react";
 export interface HeaderProps {
     title?: React.ReactNode;
     subtitle?: React.ReactNode;
+    clientName?: React.ReactNode;
     realmName?: string;
 }
 
-export const Header: React.FC<HeaderProps> = ({ title, subtitle, realmName }) => {
+export const Header: React.FC<HeaderProps> = ({ title, subtitle, clientName, realmName }) => {
+    const displayName = clientName || realmName;
+
     return (
         <div className="flex flex-col items-center text-center space-y-2 mb-6">
             <div className="flex items-center justify-center h-12 w-12 rounded-xl bg-primary/10 text-primary border border-primary/20 shadow-xs mb-1">
                 <BookOpen className="h-6 w-6 stroke-[2.2]" />
             </div>
             <div className="space-y-1">
-                <div className="text-xs font-semibold tracking-wider uppercase text-primary/80">
-                    {realmName || "CampusBook"}
-                </div>
+                {displayName && (
+                    <div className="text-xs font-semibold tracking-wider uppercase text-primary/80">
+                        {displayName}
+                    </div>
+                )}
                 {title && (
                     <h1 className="text-xl sm:text-2xl font-bold tracking-tight text-foreground">
                         {title}

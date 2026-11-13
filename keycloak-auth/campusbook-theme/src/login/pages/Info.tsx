@@ -37,7 +37,7 @@ export default function Info(props: PageProps<Extract<KcContext, { pageId: "info
                                 let html = message.summary?.trim() ?? "";
                                 if (requiredActions) {
                                     html += " <b>";
-                                    html += requiredActions.map((requiredAction) => advancedMsgStr(`requiredAction.${requiredAction}`)).join(", ");
+                                    html += requiredActions.map(requiredAction => advancedMsgStr(`requiredAction.${requiredAction}`)).join(", ");
                                     html += "</b>";
                                 }
                                 return html;
@@ -56,9 +56,7 @@ export default function Info(props: PageProps<Extract<KcContext, { pageId: "info
                             </a>
                         ) : actionUri ? (
                             <a href={actionUri} className="w-full block">
-                                <Button className="w-full">
-                                    {msgStr("proceedWithAction")}
-                                </Button>
+                                <Button className="w-full">{msgStr("proceedWithAction")}</Button>
                             </a>
                         ) : client.baseUrl ? (
                             <a href={client.baseUrl} className="w-full block">

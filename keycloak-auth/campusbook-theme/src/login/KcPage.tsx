@@ -2,6 +2,7 @@ import { Suspense, lazy } from "react";
 import type { ClassKey } from "keycloakify/login";
 import type { KcContext } from "./KcContext";
 import { useI18n } from "./i18n";
+import { defaultKcClasses } from "./kcClasses";
 import DefaultPage from "keycloakify/login/DefaultPage";
 import Template from "./Template";
 import "./theme.css";
@@ -39,7 +40,13 @@ export default function KcPage(props: { kcContext: KcContext }) {
     const { i18n } = useI18n({ kcContext });
 
     return (
-        <Suspense fallback={<div className="min-h-screen flex items-center justify-center text-sm text-muted-foreground">Loading...</div>}>
+        <Suspense
+            fallback={
+                <div className="min-h-screen flex items-center justify-center text-sm text-muted-foreground">
+                    Loading...
+                </div>
+            }
+        >
             {(() => {
                 switch (kcContext.pageId) {
                     case "login.ftl":
@@ -274,4 +281,6 @@ export default function KcPage(props: { kcContext: KcContext }) {
     );
 }
 
-const classes = {} satisfies { [key in ClassKey]?: string };
+const classes = {
+    ...defaultKcClasses
+} satisfies { [key in ClassKey]?: string };

@@ -20,13 +20,7 @@ export default function LoginUpdatePassword(props: PageProps<Extract<KcContext, 
             displayMessage={!messagesPerField.existsError("password", "password-confirm")}
             headerNode={msg("updatePasswordTitle")}
         >
-            <form
-                id="kc-passwd-update-form"
-                action={url.loginAction}
-                method="post"
-                onSubmit={() => setIsSubmitting(true)}
-                className="space-y-4"
-            >
+            <form id="kc-passwd-update-form" action={url.loginAction} method="post" onSubmit={() => setIsSubmitting(true)} className="space-y-4">
                 <Input
                     id="password-new"
                     name="password-new"
@@ -51,22 +45,12 @@ export default function LoginUpdatePassword(props: PageProps<Extract<KcContext, 
                 />
 
                 <div className="flex items-center gap-3 pt-2">
-                    <Button
-                        type="submit"
-                        className="w-full"
-                        isLoading={isSubmitting}
-                    >
+                    <Button type="submit" className="w-full" isLoading={isSubmitting}>
                         {msgStr("doSubmit")}
                     </Button>
 
                     {isAppInitiatedAction && (
-                        <Button
-                            type="submit"
-                            name="cancel-aia"
-                            value="true"
-                            variant="outline"
-                            className="w-auto"
-                        >
+                        <Button type="submit" name="cancel-aia" value="true" variant="outline" className="w-auto">
                             {msgStr("doCancel")}
                         </Button>
                     )}

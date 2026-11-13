@@ -22,9 +22,7 @@ export default function Error(props: PageProps<Extract<KcContext, { pageId: "err
                 <div className="flex items-center justify-center h-12 w-12 rounded-full bg-destructive/10 text-destructive border border-destructive/20">
                     <AlertOctagon className="h-6 w-6" />
                 </div>
-                <p className="text-xs text-muted-foreground leading-relaxed">
-                    {message.summary}
-                </p>
+                <p className="text-xs text-muted-foreground leading-relaxed">{message.summary}</p>
 
                 {client !== undefined && client.baseUrl !== undefined && (
                     <div className="w-full pt-2">

@@ -2,9 +2,9 @@
   "clientId": "campusbook-authn",
   "name": "Campusbook Authn",
   "description": "Campusbook Authn",
-  "rootUrl": "http:://localhost:3000/",
-  "adminUrl": "http:://localhost:3000/",
-  "baseUrl": "http:://localhost:3000/",
+  "rootUrl": "http://localhost:3000/",
+  "adminUrl": "http://localhost:3000/",
+  "baseUrl": "http://localhost:3000/",
   "surrogateAuthRequired": false,
   "enabled": true,
   "alwaysDisplayInConsole": true,
@@ -16,7 +16,7 @@
   ],
   "webOrigins": [
     "http://localhost:8000/",
-    "http:://localhost:3000/"
+    "http://localhost:3000/"
   ],
   "notBefore": 0,
   "bearerOnly": false,
@@ -34,9 +34,9 @@
     "client.secret.creation.time": "1793541139",
     "oauth2.jwt.authorization.grant.enabled": "false",
     "standard.token.exchange.enabled": "true",
-    "login_theme": "keycloak.v2",
+    "login_theme": "campusbook-theme",
     "frontchannel.logout.session.required": "true",
-    "post.logout.redirect.uris": "http:://localhost:3000/",
+    "post.logout.redirect.uris": "http://localhost:3000/",
     "oauth2.device.authorization.grant.enabled": "false",
     "use.jwks.url": "false",
     "backchannel.logout.revoke.offline.tokens": "false",

@@ -22,13 +22,7 @@ export default function LoginConfigTotp(props: PageProps<Extract<KcContext, { pa
     };
 
     return (
-        <Template
-            kcContext={kcContext}
-            i18n={i18n}
-            doUseDefaultCss={doUseDefaultCss}
-            classes={classes}
-            headerNode={msg("loginTotpTitle")}
-        >
+        <Template kcContext={kcContext} i18n={i18n} doUseDefaultCss={doUseDefaultCss} classes={classes} headerNode={msg("loginTotpTitle")}>
             <div className="space-y-4 text-center">
                 <div className="flex items-center justify-center gap-2 text-xs text-muted-foreground">
                     <ShieldCheck className="h-4 w-4 text-primary" />
@@ -37,35 +31,20 @@ export default function LoginConfigTotp(props: PageProps<Extract<KcContext, { pa
 
                 {totp.totpSecretQrCode && (
                     <div className="flex justify-center p-3 bg-white rounded-xl border border-border inline-block mx-auto shadow-xs">
-                        <img
-                            src={`data:image/png;base64, ${totp.totpSecretQrCode}`}
-                            alt="TOTP QR Code"
-                            className="h-44 w-44"
-                        />
+                        <img src={`data:image/png;base64, ${totp.totpSecretQrCode}`} alt="TOTP QR Code" className="h-44 w-44" />
                     </div>
                 )}
 
                 {totp.totpSecretEncoded && (
                     <div className="p-2.5 rounded-lg bg-muted/60 border border-border/80 flex items-center justify-between text-xs font-mono">
                         <span className="truncate select-all pr-2">{totp.totpSecretEncoded}</span>
-                        <Button
-                            type="button"
-                            variant="ghost"
-                            size="sm"
-                            onClick={handleCopy}
-                            className="h-7 px-2 text-xs"
-                        >
+                        <Button type="button" variant="ghost" size="sm" onClick={handleCopy} className="h-7 px-2 text-xs">
                             {copied ? <Check className="h-3.5 w-3.5 text-emerald-500" /> : <Copy className="h-3.5 w-3.5" />}
                         </Button>
                     </div>
                 )}
 
-                <form
-                    action={url.loginAction}
-                    method="post"
-                    onSubmit={() => setIsSubmitting(true)}
-                    className="space-y-3 pt-2 text-left"
-                >
+                <form action={url.loginAction} method="post" onSubmit={() => setIsSubmitting(true)} className="space-y-3 pt-2 text-left">
                     <input type="hidden" id="totpSecret" name="totpSecret" value={totp.totpSecret} />
 
                     <Input
@@ -90,22 +69,12 @@ export default function LoginConfigTotp(props: PageProps<Extract<KcContext, { pa
                     />
 
                     <div className="flex items-center gap-3 pt-2">
-                        <Button
-                            type="submit"
-                            className="w-full"
-                            isLoading={isSubmitting}
-                        >
+                        <Button type="submit" className="w-full" isLoading={isSubmitting}>
                             {msgStr("doSubmit")}
                         </Button>
 
                         {isAppInitiatedAction && (
-                            <Button
-                                type="submit"
-                                name="cancel-aia"
-                                value="true"
-                                variant="outline"
-                                className="w-auto"
-                            >
+                            <Button type="submit" name="cancel-aia" value="true" variant="outline" className="w-auto">
                                 {msgStr("doCancel")}
                             </Button>
                         )}

@@ -10,16 +10,33 @@ export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> 
 }
 
 export const Input = React.forwardRef<HTMLInputElement, InputProps>(
-    ({ className, type = "text", label, error, helperText, showPasswordToggle = false, id, ...props }, ref) => {
+    (
+        {
+            className,
+            type = "text",
+            label,
+            error,
+            helperText,
+            showPasswordToggle = false,
+            id,
+            ...props
+        },
+        ref
+    ) => {
         const [isRevealed, setIsRevealed] = useState(false);
         const actualType = showPasswordToggle && isRevealed ? "text" : type;
 
         return (
             <div className="w-full space-y-1.5 text-left">
                 {label && (
-                    <label htmlFor={id} className="block text-xs font-medium text-foreground/80 tracking-wide">
+                    <label
+                        htmlFor={id}
+                        className="block text-xs font-medium text-foreground/80 tracking-wide"
+                    >
                         {label}
-                        {props.required && <span className="text-destructive ml-1">*</span>}
+                        {props.required && (
+                            <span className="text-destructive ml-1">*</span>
+                        )}
                     </label>
                 )}
                 <div className="relative">
@@ -28,7 +45,7 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
                         type={actualType}
                         ref={ref}
                         className={cn(
-                            "flex h-10 w-full rounded-lg border bg-background px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground/60 transition-colors shadow-2xs",
+                            "flex h-10 w-full rounded-md border bg-background px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground/60 transition-colors shadow-2xs",
                             "border-input focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1 focus-visible:border-primary",
                             error && "border-destructive focus-visible:ring-destructive",
                             showPasswordToggle && "pr-10",
@@ -44,7 +61,11 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
                             className="absolute right-2.5 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground p-1 transition-colors"
                             aria-label={isRevealed ? "Hide password" : "Show password"}
                         >
-                            {isRevealed ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                            {isRevealed ? (
+                                <EyeOff className="h-4 w-4" />
+                            ) : (
+                                <Eye className="h-4 w-4" />
+                            )}
                         </button>
                     )}
                 </div>

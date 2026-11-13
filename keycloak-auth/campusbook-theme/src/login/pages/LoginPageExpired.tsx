@@ -10,20 +10,13 @@ export default function LoginPageExpired(props: PageProps<Extract<KcContext, { p
     const { msg, msgStr } = i18n;
 
     return (
-        <Template
-            kcContext={kcContext}
-            i18n={i18n}
-            doUseDefaultCss={doUseDefaultCss}
-            classes={classes}
-            headerNode={msg("pageExpiredTitle")}
-        >
+        <Template kcContext={kcContext} i18n={i18n} doUseDefaultCss={doUseDefaultCss} classes={classes} headerNode={msg("pageExpiredTitle")}>
             <div className="flex flex-col items-center text-center space-y-4 my-2">
                 <div className="flex items-center justify-center h-12 w-12 rounded-full bg-amber-500/10 text-amber-600 border border-amber-500/20">
                     <Clock className="h-6 w-6" />
                 </div>
                 <p className="text-xs text-muted-foreground leading-relaxed">
-                    {msg("pageExpiredMsg1")}{" "}
-                    {msg("pageExpiredMsg2")}
+                    {msg("pageExpiredMsg1")} {msg("pageExpiredMsg2")}
                 </p>
 
                 <div className="w-full pt-2">

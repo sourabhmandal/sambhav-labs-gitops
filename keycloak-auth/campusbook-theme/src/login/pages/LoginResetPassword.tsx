@@ -28,17 +28,9 @@ export default function LoginResetPassword(props: PageProps<Extract<KcContext, {
                 </span>
             }
         >
-            <form
-                id="kc-reset-password-form"
-                action={url.loginAction}
-                method="post"
-                onSubmit={() => setIsSubmitting(true)}
-                className="space-y-4"
-            >
+            <form id="kc-reset-password-form" action={url.loginAction} method="post" onSubmit={() => setIsSubmitting(true)} className="space-y-4">
                 <p className="text-xs text-muted-foreground">
-                    {realm.duplicateEmailsAllowed
-                        ? msg("emailInstructionUsername")
-                        : msg("emailInstruction")}
+                    {realm.duplicateEmailsAllowed ? msg("emailInstructionUsername") : msg("emailInstruction")}
                 </p>
 
                 <Input
@@ -58,11 +50,7 @@ export default function LoginResetPassword(props: PageProps<Extract<KcContext, {
                     error={messagesPerField.get("username")}
                 />
 
-                <Button
-                    type="submit"
-                    className="w-full mt-2"
-                    isLoading={isSubmitting}
-                >
+                <Button type="submit" className="w-full mt-2" isLoading={isSubmitting}>
                     {msgStr("doSubmit")}
                 </Button>
             </form>
