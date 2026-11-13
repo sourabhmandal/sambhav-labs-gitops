@@ -919,7 +919,7 @@ function decodeHtmlEntities(htmlStr){
                 } catch (e) {}
             })();
         </script>
-      <script type="module" crossorigin="" src="${xKeycloakify.resourcesPath}/dist/assets/index-CCvJvi2y.js"></script>
+      <script type="module" crossorigin="" src="${xKeycloakify.resourcesPath}/dist/assets/index-D31FWjFL.js"></script>
       <link rel="stylesheet" crossorigin="" href="${xKeycloakify.resourcesPath}/dist/assets/index-vled90y4.css">
     </head>
 

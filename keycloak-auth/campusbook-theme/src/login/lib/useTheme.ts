@@ -47,14 +47,15 @@ if (typeof window !== "undefined") {
 }
 
 function isTypingTarget(target: EventTarget | null) {
-    if (!(target instanceof HTMLElement)) {
+    if (!target || !(target instanceof HTMLElement)) {
         return false;
     }
     return (
         target.isContentEditable ||
         target.tagName === "INPUT" ||
         target.tagName === "TEXTAREA" ||
-        target.tagName === "SELECT"
+        target.tagName === "SELECT" ||
+        Boolean(target.closest?.("input, textarea, select, [contenteditable='true']"))
     );
 }
 
@@ -106,16 +107,16 @@ export function useTheme() {
     // Campusbook 'd' hotkey listener
     useEffect(() => {
         function onKeyDown(event: KeyboardEvent) {
-            if (event.defaultPrevented || event.repeat) {
+            if (!event || event.defaultPrevented || event.repeat) {
+                return;
+            }
+            if (isTypingTarget(event.target)) {
                 return;
             }
             if (event.metaKey || event.ctrlKey || event.altKey) {
                 return;
             }
-            if (event.key.toLowerCase() !== "d") {
-                return;
-            }
-            if (isTypingTarget(event.target)) {
+            if (typeof event.key !== "string" || event.key.toLowerCase() !== "d") {
                 return;
             }
             setTheme(theme === "dark" ? "light" : "dark");

@@ -4,11 +4,12 @@ import type { I18n } from "../i18n";
 import { KeyRound, Shield, Fingerprint } from "lucide-react";
 import { Button } from "../components/Button";
 
-function getIcon(helpText: string) {
-    if (helpText.includes("webauthn") || helpText.includes("passkey")) {
+function getIcon(helpText?: string) {
+    const text = (helpText || "").toLowerCase();
+    if (text.includes("webauthn") || text.includes("passkey")) {
         return <Fingerprint className="h-5 w-5 text-primary" />;
     }
-    if (helpText.includes("totp") || helpText.includes("otp")) {
+    if (text.includes("totp") || text.includes("otp")) {
         return <KeyRound className="h-5 w-5 text-primary" />;
     }
     return <Shield className="h-5 w-5 text-primary" />;
