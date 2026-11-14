@@ -175,7 +175,7 @@
       "config": {
         "resources": "[\"report\"]",
         "scopes": "[\"create\"]",
-        "applyPolicies": "[\"ADMIN Role policy\",\"GUEST Role policy\",\"STUDENT role policy\"]"
+        "applyPolicies": "[\"STUDENT role policy\",\"GUEST Role policy\",\"ADMIN Role policy\"]"
       }
     },
     {
@@ -187,7 +187,7 @@
       "config": {
         "resources": "[\"report\"]",
         "scopes": "[\"read\"]",
-        "applyPolicies": "[\"ADMIN Role policy\",\"GUEST Role policy\",\"STUDENT role policy\"]"
+        "applyPolicies": "[\"STUDENT role policy\",\"GUEST Role policy\",\"ADMIN Role policy\"]"
       }
     },
     {
@@ -199,7 +199,7 @@
       "config": {
         "resources": "[\"activity\"]",
         "scopes": "[\"read\"]",
-        "applyPolicies": "[\"ADMIN Role policy\",\"STUDENT role policy\"]"
+        "applyPolicies": "[\"STUDENT role policy\",\"GUEST Role policy\",\"ADMIN Role policy\"]"
       }
     },
     {
@@ -211,7 +211,7 @@
       "config": {
         "resources": "[\"activity\"]",
         "scopes": "[\"create\"]",
-        "applyPolicies": "[\"ADMIN Role policy\",\"STUDENT role policy\"]"
+        "applyPolicies": "[\"STUDENT role policy\",\"ADMIN Role policy\"]"
       }
     },
     {
@@ -223,7 +223,7 @@
       "config": {
         "resources": "[\"post\"]",
         "scopes": "[\"read\"]",
-        "applyPolicies": "[\"ADMIN Role policy\",\"STUDENT role policy\"]"
+        "applyPolicies": "[\"STUDENT role policy\",\"ADMIN Role policy\"]"
       }
     },
     {
@@ -303,7 +303,7 @@
       "description": "user:list",
       "type": "scope",
       "logic": "POSITIVE",
-      "decisionStrategy": "UNANIMOUS",
+      "decisionStrategy": "AFFIRMATIVE",
       "config": {
         "resources": "[\"user\"]",
         "scopes": "[\"list\"]",
@@ -391,7 +391,7 @@
       "config": {
         "resources": "[\"attachment\"]",
         "scopes": "[\"read\"]",
-        "applyPolicies": "[\"ADMIN Role policy\",\"STUDENT role policy\"]"
+        "applyPolicies": "[\"STUDENT role policy\",\"ADMIN Role policy\"]"
       }
     },
     {

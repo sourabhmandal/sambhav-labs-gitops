@@ -46,101 +46,6 @@
   "maxDeltaTimeSeconds": 43200,
   "failureFactor": 30,
   "maxSecondaryAuthFailures": 0,
-  "roles": {
-    "realm": [
-      {
-        "id": "f3d3ceec-1bda-4d4b-a91b-49b87f036d85",
-        "name": "ADMIN",
-        "description": "ADMIN",
-        "composite": false,
-        "clientRole": false,
-        "containerId": "703244f1-de4f-417e-a529-0e3a139b2eaa",
-        "attributes": {}
-      },
-      {
-        "id": "16a99f71-da11-477f-a99c-14eb9988206d",
-        "name": "STUDENT",
-        "description": "STUDENT",
-        "composite": false,
-        "clientRole": false,
-        "containerId": "703244f1-de4f-417e-a529-0e3a139b2eaa",
-        "attributes": {}
-      },
-      {
-        "id": "30f12b19-b96a-45a4-bff4-cf401b75cd6f",
-        "name": "DEVELOPER",
-        "description": "DEVELOPER",
-        "composite": true,
-        "composites": {
-          "realm": [
-            "STUDENT",
-            "ADMIN"
-          ]
-        },
-        "clientRole": false,
-        "containerId": "703244f1-de4f-417e-a529-0e3a139b2eaa",
-        "attributes": {}
-      },
-      {
-        "id": "9fac6031-5648-49e1-82b2-12d4d6c87040",
-        "name": "GUEST",
-        "description": "GUEST",
-        "composite": false,
-        "clientRole": false,
-        "containerId": "703244f1-de4f-417e-a529-0e3a139b2eaa",
-        "attributes": {}
-      },
-      {
-        "id": "6c11e5ec-dbdf-4c14-ac6d-a2e12e455534",
-        "name": "uma_authorization",
-        "description": "${role_uma_authorization}",
-        "composite": false,
-        "clientRole": false,
-        "containerId": "703244f1-de4f-417e-a529-0e3a139b2eaa",
-        "attributes": {}
-      },
-      {
-        "id": "b9dc5273-58c1-4172-bad7-d0be2195d14e",
-        "name": "offline_access",
-        "description": "${role_offline-access}",
-        "composite": false,
-        "clientRole": false,
-        "containerId": "703244f1-de4f-417e-a529-0e3a139b2eaa",
-        "attributes": {}
-      },
-      {
-        "id": "4cd43b4c-e4f1-4c37-adb1-3ddacf27ed8f",
-        "name": "default-roles-campusbook",
-        "description": "${role_default-roles}",
-        "composite": true,
-        "composites": {
-          "realm": [
-            "offline_access",
-            "uma_authorization"
-          ],
-          "client": {
-            "account": [
-              "manage-account",
-              "view-profile"
-            ]
-          }
-        },
-        "clientRole": false,
-        "containerId": "703244f1-de4f-417e-a529-0e3a139b2eaa",
-        "attributes": {}
-      },
-      {
-        "id": "435723a1-ba1b-4ec5-910e-cb96b90beeae",
-        "name": "view-identity-providers",
-        "description": "view-identity-providers",
-        "composite": false,
-        "clientRole": false,
-        "containerId": "703244f1-de4f-417e-a529-0e3a139b2eaa",
-        "attributes": {}
-      }
-    ]
-  },
-  "groups": [],
   "defaultRole": {
     "id": "4cd43b4c-e4f1-4c37-adb1-3ddacf27ed8f",
     "name": "default-roles-campusbook",
@@ -222,12 +127,13 @@
           "protocolMapper": "oidc-organization-membership-mapper",
           "consentRequired": false,
           "config": {
-            "id.token.claim": "true",
             "introspection.token.claim": "true",
+            "multivalued": "true",
+            "userinfo.token.claim": "true",
+            "id.token.claim": "true",
             "access.token.claim": "true",
             "claim.name": "organization",
-            "jsonType.label": "String",
-            "multivalued": "true"
+            "jsonType.label": "String"
           }
         }
       ]
@@ -504,6 +410,7 @@
           "config": {
             "introspection.token.claim": "true",
             "multivalued": "true",
+            "userinfo.token.claim": "true",
             "user.attribute": "foo",
             "id.token.claim": "true",
             "access.token.claim": "true",
@@ -599,8 +506,8 @@
           "protocolMapper": "oidc-allowed-origins-mapper",
           "consentRequired": false,
           "config": {
-            "introspection.token.claim": "true",
-            "access.token.claim": "true"
+            "access.token.claim": "true",
+            "introspection.token.claim": "true"
           }
         }
       ]
@@ -653,8 +560,8 @@
           "protocolMapper": "oidc-audience-resolve-mapper",
           "consentRequired": false,
           "config": {
-            "introspection.token.claim": "true",
-            "access.token.claim": "true"
+            "access.token.claim": "true",
+            "introspection.token.claim": "true"
           }
         }
       ]
@@ -684,7 +591,8 @@
             "introspection.token.claim": "true",
             "access.token.claim": "true",
             "claim.name": "may_act.sub",
-            "jsonType.label": "String"
+            "jsonType.label": "String",
+            "userinfo.token.claim": "true"
           }
         },
         {
@@ -698,7 +606,8 @@
             "introspection.token.claim": "true",
             "access.token.claim": "true",
             "claim.name": "may_act.client_id",
-            "jsonType.label": "String"
+            "jsonType.label": "String",
+            "userinfo.token.claim": "true"
           }
         },
         {
@@ -708,8 +617,8 @@
           "protocolMapper": "oidc-parameterized-scope-audience-mapper",
           "consentRequired": false,
           "config": {
-            "introspection.token.claim": "true",
-            "access.token.claim": "true"
+            "access.token.claim": "true",
+            "introspection.token.claim": "true"
           }
         }
       ]
@@ -773,8 +682,8 @@
           "protocolMapper": "oidc-sub-mapper",
           "consentRequired": false,
           "config": {
-            "introspection.token.claim": "true",
-            "access.token.claim": "true"
+            "access.token.claim": "true",
+            "introspection.token.claim": "true"
           }
         },
         {
@@ -785,8 +694,9 @@
           "consentRequired": false,
           "config": {
             "user.session.note": "AUTH_TIME",
-            "id.token.claim": "true",
             "introspection.token.claim": "true",
+            "userinfo.token.claim": "true",
+            "id.token.claim": "true",
             "access.token.claim": "true",
             "claim.name": "auth_time",
             "jsonType.label": "long"
@@ -898,6 +808,7 @@
           "config": {
             "introspection.token.claim": "true",
             "multivalued": "false",
+            "userinfo.token.claim": "true",
             "user.attribute": "id",
             "id.token.claim": "true",
             "access.token.claim": "true",
@@ -925,8 +836,9 @@
           "consentRequired": false,
           "config": {
             "id.token.claim": "true",
+            "access.token.claim": "true",
             "introspection.token.claim": "true",
-            "access.token.claim": "true"
+            "userinfo.token.claim": "true"
           }
         }
       ]
@@ -949,8 +861,9 @@
           "consentRequired": false,
           "config": {
             "user.session.note": "clientAddress",
-            "id.token.claim": "true",
             "introspection.token.claim": "true",
+            "userinfo.token.claim": "true",
+            "id.token.claim": "true",
             "access.token.claim": "true",
             "claim.name": "clientAddress",
             "jsonType.label": "String"
@@ -964,8 +877,9 @@
           "consentRequired": false,
           "config": {
             "user.session.note": "client_id",
-            "id.token.claim": "true",
             "introspection.token.claim": "true",
+            "userinfo.token.claim": "true",
+            "id.token.claim": "true",
             "access.token.claim": "true",
             "claim.name": "client_id",
             "jsonType.label": "String"
@@ -979,8 +893,9 @@
           "consentRequired": false,
           "config": {
             "user.session.note": "clientHost",
-            "id.token.claim": "true",
             "introspection.token.claim": "true",
+            "userinfo.token.claim": "true",
+            "id.token.claim": "true",
             "access.token.claim": "true",
             "claim.name": "clientHost",
             "jsonType.label": "String"
@@ -1019,6 +934,10 @@
     "strictTransportSecurity": "max-age=31536000; includeSubDomains"
   },
   "smtpServer": {},
+  "loginTheme": "campusbook-theme",
+  "accountTheme": "",
+  "adminTheme": "",
+  "emailTheme": "",
   "eventsEnabled": false,
   "eventsListeners": [
     "jboss-logging"
@@ -1030,29 +949,27 @@
     {
       "alias": "google",
       "displayName": "Login with Google",
-      "internalId": "47738617-5d42-4c82-b313-567d37dcac24",
+      "internalId": "c309f758-59fb-457a-9f6a-4ed50b77a0b1",
       "providerId": "google",
       "enabled": true,
       "trustEmail": true,
       "storeToken": false,
       "linkOnly": false,
       "hideOnLogin": false,
+      "firstBrokerLoginFlowAlias": "first-broker-login-autolink",
       "config": {
-        "offlineAccess": "false",
-        "acceptsPromptNoneForwardFromClient": "false",
         "clientId": "263576382309-8hnp3s6goh2rel60284huaeqonqs54qg.apps.googleusercontent.com",
+        "acceptsPromptNoneForwardFromClient": "false",
+        "disableUserInfo": "false",
+        "allowAdminRoleMapping": "false",
         "showInAccountConsole": "ALWAYS",
         "filteredByClaim": "false",
-        "jwtAuthorizationGrantEnabled": "false",
+        "syncMode": "FORCE",
+        "clientSecret": "**********",
         "caseSensitiveOriginalUsername": "false",
         "issuer": "https://accounts.google.com",
         "jwtAuthorizationGrantMaxAllowedAssertionExpiration": "3600",
-        "allowAdminRoleMapping": "false",
-        "disableUserInfo": "false",
-        "syncMode": "IMPORT",
-        "clientSecret": "**********",
-        "guiOrder": "1",
-        "defaultScope": "openid profile email"
+        "guiOrder": "1"
       },
       "types": []
     },
@@ -1066,6 +983,7 @@
       "storeToken": false,
       "linkOnly": false,
       "hideOnLogin": false,
+      "firstBrokerLoginFlowAlias": "first-broker-login-autolink",
       "config": {
         "acceptsPromptNoneForwardFromClient": "false",
         "clientId": "7af03df8-31a1-4ef0-ba95-cfd5c0aaea3a",
@@ -1074,7 +992,7 @@
         "caseSensitiveOriginalUsername": "false",
         "allowAdminRoleMapping": "false",
         "disableUserInfo": "false",
-        "syncMode": "IMPORT",
+        "syncMode": "FORCE",
         "tenantId": "6d28e4fb-9074-4a0b-a5b8-9a89f632cc60",
         "clientSecret": "**********",
         "prompt": "prompt=select_account",
@@ -1086,17 +1004,6 @@
   ],
   "identityProviderMappers": [
     {
-      "id": "1304c560-62d7-4663-9d5d-df2573cc2bcc",
-      "name": "Google Picture Mapper",
-      "identityProviderAlias": "google",
-      "identityProviderMapper": "google-user-attribute-mapper",
-      "config": {
-        "syncMode": "INHERIT",
-        "userAttribute": "picture",
-        "jsonField": "picture"
-      }
-    },
-    {
       "id": "bb6f32c4-8ca9-4e4a-96b3-c7a3f1adb351",
       "name": "Microsoft Profile Picture",
       "identityProviderAlias": "microsoft",
@@ -1105,17 +1012,6 @@
         "syncMode": "INHERIT",
         "userAttribute": "picture",
         "jsonField": "picture"
-      }
-    },
-    {
-      "id": "df1c2b39-325f-4ca0-bb00-c898e1b209c2",
-      "name": "Google Email",
-      "identityProviderAlias": "google",
-      "identityProviderMapper": "google-user-attribute-mapper",
-      "config": {
-        "syncMode": "INHERIT",
-        "userAttribute": "email",
-        "jsonField": "email"
       }
     }
   ],
@@ -1149,14 +1045,14 @@
         "subComponents": {},
         "config": {
           "allowed-protocol-mapper-types": [
-            "saml-role-list-mapper",
-            "oidc-usermodel-attribute-mapper",
-            "oidc-full-name-mapper",
             "oidc-sha256-pairwise-sub-mapper",
-            "saml-user-attribute-mapper",
+            "oidc-usermodel-property-mapper",
+            "oidc-full-name-mapper",
             "saml-user-property-mapper",
             "oidc-address-mapper",
-            "oidc-usermodel-property-mapper"
+            "oidc-usermodel-attribute-mapper",
+            "saml-role-list-mapper",
+            "saml-user-attribute-mapper"
           ]
         }
       },
@@ -1188,14 +1084,14 @@
         "subComponents": {},
         "config": {
           "allowed-protocol-mapper-types": [
-            "saml-user-attribute-mapper",
-            "oidc-usermodel-attribute-mapper",
-            "saml-user-property-mapper",
             "oidc-sha256-pairwise-sub-mapper",
             "saml-role-list-mapper",
             "oidc-full-name-mapper",
             "oidc-address-mapper",
-            "oidc-usermodel-property-mapper"
+            "saml-user-property-mapper",
+            "oidc-usermodel-property-mapper",
+            "oidc-usermodel-attribute-mapper",
+            "saml-user-attribute-mapper"
           ]
         }
       },
@@ -1250,7 +1146,7 @@
         "subComponents": {},
         "config": {
           "kc.user.profile.config": [
-            "{\"attributes\":[{\"name\":\"username\",\"displayName\":\"${username}\",\"validations\":{\"length\":{\"min\":3,\"max\":255},\"username-prohibited-characters\":{},\"up-username-not-idn-homograph\":{}},\"annotations\":{},\"permissions\":{\"view\":[\"admin\",\"user\"],\"edit\":[\"admin\"]},\"multivalued\":false},{\"name\":\"email\",\"displayName\":\"${email}\",\"validations\":{\"email\":{},\"length\":{\"max\":255}},\"annotations\":{},\"required\":{\"roles\":[\"user\"]},\"permissions\":{\"view\":[\"admin\",\"user\"],\"edit\":[\"admin\"]},\"multivalued\":false},{\"name\":\"firstName\",\"displayName\":\"${firstName}\",\"validations\":{\"length\":{\"max\":255},\"person-name-prohibited-characters\":{}},\"annotations\":{},\"required\":{\"roles\":[\"user\"]},\"permissions\":{\"view\":[\"admin\",\"user\"],\"edit\":[\"admin\",\"user\"]},\"multivalued\":false},{\"name\":\"lastName\",\"displayName\":\"${lastName}\",\"validations\":{\"length\":{\"max\":255},\"person-name-prohibited-characters\":{}},\"required\":{\"roles\":[\"user\"]},\"permissions\":{\"view\":[\"admin\",\"user\"],\"edit\":[\"admin\",\"user\"]},\"multivalued\":false},{\"name\":\"picture\",\"displayName\":\"Profile Picture\",\"validations\":{},\"annotations\":{},\"permissions\":{\"view\":[\"admin\",\"user\"],\"edit\":[\"admin\"]},\"selector\":{\"scopes\":[\"profile\"]},\"multivalued\":false},{\"name\":\"college_email\",\"displayName\":\"College Email\",\"validations\":{\"pattern\":{\"pattern\":\"^[a-zA-Z0-9._%+-]+@aitpune\\\\.edu\\\\.in$\",\"error-message\":\"College email should end with @aitpune.edu.in\"}},\"annotations\":{\"inputHelperTextAfter\":\"using another student's college email may lead to permanent ban of your account\",\"inputType\":\"html5-email\"},\"required\":{\"roles\":[\"admin\",\"user\"]},\"permissions\":{\"view\":[\"admin\",\"user\"],\"edit\":[\"admin\",\"user\"]},\"multivalued\":false},{\"name\":\"accountStatus\",\"displayName\":\"Account Status\",\"validations\":{\"integer\":{\"min\":\"0\",\"max\":\"2\"}},\"annotations\":{},\"required\":{\"roles\":[\"admin\",\"user\"]},\"permissions\":{\"view\":[\"admin\"],\"edit\":[\"admin\"]},\"group\":\"user-metadata\",\"multivalued\":false,\"defaultValue\":\"0\"},{\"name\":\"phone\",\"displayName\":\"Phone Number\",\"validations\":{\"pattern\":{\"pattern\":\"^(?:\\\\+91 ?[6-9]\\\\d{4}-?\\\\d{5}|\\\\+?[6-9]\\\\d ?\\\\d{5}-?\\\\d{3}|\\\\+?[6-9]\\\\d{9})$\",\"error-message\":\"Enter a valid 10-digit Indian mobile number starting with 6, 7, 8, or 9\"},\"length\":{\"min\":\"13\",\"max\":\"13\"}},\"annotations\":{\"kcNumberUnFormat\":\"+{2}{10}\",\"inputHelperTextAfter\":\"Mobile number should start with +91 followed by 10 digit number\",\"inputHelperTextBefore\":\"(for receiving whatsapp updates)\",\"inputTypeSize\":\"14\",\"inputTypePlaceholder\":\"+91 98765-43210\",\"kcNumberFormat\":\"+{2} {5}-{5}\"},\"permissions\":{\"view\":[\"admin\",\"user\"],\"edit\":[\"admin\",\"user\"]},\"multivalued\":false}],\"groups\":[{\"name\":\"user-metadata\",\"displayHeader\":\"User metadata\",\"displayDescription\":\"Attributes, which refer to user metadata\"}]}"
+            "{\"attributes\":[{\"name\":\"username\",\"displayName\":\"${username}\",\"validations\":{\"length\":{\"min\":3,\"max\":255},\"username-prohibited-characters\":{},\"up-username-not-idn-homograph\":{}},\"annotations\":{},\"permissions\":{\"view\":[\"admin\",\"user\"],\"edit\":[\"admin\"]},\"multivalued\":false},{\"name\":\"email\",\"displayName\":\"${email}\",\"validations\":{\"email\":{},\"length\":{\"max\":255}},\"annotations\":{},\"required\":{\"roles\":[\"user\"]},\"permissions\":{\"view\":[\"admin\",\"user\"],\"edit\":[\"admin\"]},\"multivalued\":false},{\"name\":\"firstName\",\"displayName\":\"${firstName}\",\"validations\":{\"length\":{\"max\":255},\"person-name-prohibited-characters\":{}},\"annotations\":{},\"required\":{\"roles\":[\"user\"]},\"permissions\":{\"view\":[\"admin\",\"user\"],\"edit\":[\"admin\",\"user\"]},\"multivalued\":false},{\"name\":\"lastName\",\"displayName\":\"${lastName}\",\"validations\":{\"length\":{\"max\":255},\"person-name-prohibited-characters\":{}},\"required\":{\"roles\":[\"user\"]},\"permissions\":{\"view\":[\"admin\",\"user\"],\"edit\":[\"admin\",\"user\"]},\"multivalued\":false},{\"name\":\"picture\",\"displayName\":\"Profile Picture\",\"validations\":{},\"annotations\":{},\"permissions\":{\"view\":[\"admin\",\"user\"],\"edit\":[\"admin\"]},\"selector\":{\"scopes\":[\"profile\"]},\"multivalued\":false},{\"name\":\"college_email\",\"displayName\":\"College Email\",\"validations\":{\"pattern\":{\"pattern\":\"^[a-zA-Z0-9._%+-]+@aitpune\\\\.edu\\\\.in$\",\"error-message\":\"College email should end with @aitpune.edu.in\"}},\"annotations\":{\"inputHelperTextAfter\":\"using another student's college email may lead to permanent ban of your account\",\"inputType\":\"html5-email\"},\"required\":{\"roles\":[\"admin\",\"user\"]},\"permissions\":{\"view\":[\"admin\",\"user\"],\"edit\":[\"admin\",\"user\"]},\"multivalued\":false},{\"name\":\"accountStatus\",\"displayName\":\"Account Status\",\"validations\":{\"options\":{\"min\":\"\",\"max\":\"\",\"options\":[\"ACTIVE\",\"INACTIVE\",\"INVITED\"]}},\"annotations\":{\"inputType\":\"select\"},\"required\":{\"roles\":[\"admin\",\"user\"]},\"permissions\":{\"view\":[\"admin\"],\"edit\":[\"admin\"]},\"group\":\"user-metadata\",\"multivalued\":false,\"defaultValue\":\"ACTIVE\"},{\"name\":\"phone\",\"displayName\":\"Phone Number\",\"validations\":{\"pattern\":{\"pattern\":\"^(?:\\\\+91 ?[6-9]\\\\d{4}-?\\\\d{5}|\\\\+?[6-9]\\\\d ?\\\\d{5}-?\\\\d{3}|\\\\+?[6-9]\\\\d{9})$\",\"error-message\":\"Enter a valid 10-digit Indian mobile number starting with 6, 7, 8, or 9\"},\"length\":{\"min\":\"13\",\"max\":\"13\"}},\"annotations\":{\"kcNumberUnFormat\":\"+{2}{10}\",\"inputHelperTextAfter\":\"Mobile number should start with +91 followed by 10 digit number\",\"inputHelperTextBefore\":\"(for receiving whatsapp updates)\",\"inputTypeSize\":\"14\",\"inputTypePlaceholder\":\"+91 98765-43210\",\"kcNumberFormat\":\"+{2} {5}-{5}\"},\"permissions\":{\"view\":[\"admin\",\"user\"],\"edit\":[\"admin\",\"user\"]},\"multivalued\":false}],\"groups\":[{\"name\":\"user-metadata\",\"displayHeader\":\"User metadata\",\"displayDescription\":\"Attributes, which refer to user metadata\"}]}"
           ]
         }
       }
@@ -1826,6 +1722,94 @@
       ]
     },
     {
+      "id": "e282f732-7b1d-4d73-a72f-f2476ada7894",
+      "alias": "first-broker-login-autolink",
+      "description": "Actions taken after first broker login with identity provider account, which is not yet linked to any Keycloak account",
+      "providerId": "basic-flow",
+      "topLevel": true,
+      "builtIn": false,
+      "authenticationExecutions": [
+        {
+          "authenticatorConfig": "first-broker-login-autolink review profile config",
+          "authenticator": "idp-review-profile",
+          "authenticatorFlow": false,
+          "requirement": "REQUIRED",
+          "priority": 10,
+          "autheticatorFlow": false,
+          "userSetupAllowed": false
+        },
+        {
+          "authenticatorFlow": true,
+          "requirement": "REQUIRED",
+          "priority": 20,
+          "autheticatorFlow": true,
+          "flowAlias": "first-broker-login-autolink User creation or linking",
+          "userSetupAllowed": false
+        },
+        {
+          "authenticatorFlow": true,
+          "requirement": "CONDITIONAL",
+          "priority": 60,
+          "autheticatorFlow": true,
+          "flowAlias": "first-broker-login-autolink First Broker Login - Conditional Organization",
+          "userSetupAllowed": false
+        }
+      ]
+    },
+    {
+      "id": "457ffbdb-3ed4-46b1-b9d6-53fe1300da5f",
+      "alias": "first-broker-login-autolink First Broker Login - Conditional Organization",
+      "description": "Flow to determine if the authenticator that adds organization members is to be used",
+      "providerId": "basic-flow",
+      "topLevel": false,
+      "builtIn": false,
+      "authenticationExecutions": [
+        {
+          "authenticator": "conditional-user-configured",
+          "authenticatorFlow": false,
+          "requirement": "REQUIRED",
+          "priority": 10,
+          "autheticatorFlow": false,
+          "userSetupAllowed": false
+        },
+        {
+          "authenticator": "idp-add-organization-member",
+          "authenticatorFlow": false,
+          "requirement": "REQUIRED",
+          "priority": 20,
+          "autheticatorFlow": false,
+          "userSetupAllowed": false
+        }
+      ]
+    },
+    {
+      "id": "21471d3b-1227-4382-ba24-aa6bb9bdfccd",
+      "alias": "first-broker-login-autolink User creation or linking",
+      "description": "Flow for the existing/non-existing user alternatives",
+      "providerId": "basic-flow",
+      "topLevel": false,
+      "builtIn": false,
+      "authenticationExecutions": [
+        {
+          "authenticatorConfig": "first-broker-login-autolink create unique user config",
+          "authenticator": "idp-create-user-if-unique",
+          "authenticatorFlow": false,
+          "requirement": "ALTERNATIVE",
+          "priority": 0,
+          "autheticatorFlow": false,
+          "userSetupAllowed": false
+        },
+        {
+          "authenticator": "idp-auto-link",
+          "authenticatorFlow": false,
+          "requirement": "ALTERNATIVE",
+          "priority": 10,
+          "autheticatorFlow": false,
+          "userSetupAllowed": false
+        }
+      ]
+    },
+    {
       "id": "86f63036-3f2f-4fd8-809d-33b08fea08a0",
       "alias": "forms",
       "description": "Username, password, otp and other auth forms.",
@@ -1989,6 +1973,20 @@
       }
     },
     {
+      "id": "3ed23939-b377-4a31-9c8d-5b716e838ca4",
+      "alias": "first-broker-login-autolink create unique user config",
+      "config": {
+        "require.password.update.after.registration": "false"
+      }
+    },
+    {
+      "id": "cebb36f4-d0f7-4862-9ee7-51f1a7ea7de3",
+      "alias": "first-broker-login-autolink review profile config",
+      "config": {
+        "update.profile.on.first.login": "missing"
+      }
+    },
+    {
       "id": "c18ab06e-793e-4aa0-9f79-40331ad6bc70",
       "alias": "first-broker-login-conditional-credential",
       "config": {
@@ -2146,12 +2144,12 @@
   "resetCredentialsFlow": "reset credentials",
   "clientAuthenticationFlow": "clients",
   "dockerAuthenticationFlow": "docker auth",
-  "firstBrokerLoginFlow": "first broker login",
+  "firstBrokerLoginFlow": "first-broker-login-autolink",
   "attributes": {
     "cibaBackchannelTokenDeliveryMode": "poll",
     "cibaAuthRequestedUserHint": "login_hint",
-    "oauth2DevicePollingInterval": "5",
     "clientOfflineSessionMaxLifespan": "0",
+    "oauth2DevicePollingInterval": "5",
     "clientSessionIdleTimeout": "0",
     "clientOfflineSessionIdleTimeout": "0",
     "cibaInterval": "5",
@@ -2160,7 +2158,8 @@
     "oauth2DeviceCodeLifespan": "600",
     "parRequestUriLifespan": "60",
     "clientSessionMaxLifespan": "0",
-    "scimApiEnabled": "false"
+    "scimApiEnabled": "false",
+    "darkMode": "true"
   },
   "keycloakVersion": "26.8.1",
   "userManagedAccessAllowed": false,

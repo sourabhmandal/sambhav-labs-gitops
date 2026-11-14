@@ -10,8 +10,12 @@
   "alwaysDisplayInConsole": true,
   "clientAuthenticatorType": "client-secret",
   "secret": "8WrQawxy55HyKJUkeE1Ya2drVn3kYjkNbH6YeyqmbMVglrdwvaSi65cK3QukkcEf4YtPimvnU0hANwyoXawEwQ",
-  "redirectUris": [],
-  "webOrigins": [],
+  "redirectUris": [
+    "/*"
+  ],
+  "webOrigins": [
+    "/*"
+  ],
   "notBefore": 0,
   "bearerOnly": false,
   "consentRequired": false,

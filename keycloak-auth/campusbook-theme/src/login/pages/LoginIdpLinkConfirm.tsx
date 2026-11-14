@@ -17,29 +17,27 @@ export default function LoginIdpLinkConfirm(props: PageProps<Extract<KcContext, 
                 <div className="flex items-center justify-center h-12 w-12 rounded-full bg-primary/10 text-primary border border-primary/20">
                     <Link2 className="h-6 w-6" />
                 </div>
-                <p className="text-xs text-muted-foreground leading-relaxed">{msg("confirmLinkIdpReviewProfile")}</p>
-
                 <form action={url.loginAction} method="post" className="w-full space-y-3 pt-2">
                     <Button
                         type="submit"
                         name="submitAction"
-                        value="updateProfile"
-                        className="w-full"
-                        onClick={() => setActionClicked("updateProfile")}
-                        isLoading={actionClicked === "updateProfile"}
-                    >
-                        {msg("confirmLinkIdpReviewProfile")}
-                    </Button>
-                    <Button
-                        type="submit"
-                        name="submitAction"
                         value="linkAccount"
-                        variant="outline"
                         className="w-full"
                         onClick={() => setActionClicked("linkAccount")}
                         isLoading={actionClicked === "linkAccount"}
                     >
                         {msg("confirmLinkIdpContinue", idpAlias)}
+                    </Button>
+                    <Button
+                        type="submit"
+                        name="submitAction"
+                        value="updateProfile"
+                        variant="outline"
+                        className="w-full"
+                        onClick={() => setActionClicked("updateProfile")}
+                        isLoading={actionClicked === "updateProfile"}
+                    >
+                        {msg("confirmLinkIdpReviewProfile")}
                     </Button>
                 </form>
             </div>
