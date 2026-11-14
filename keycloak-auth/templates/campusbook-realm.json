@@ -960,16 +960,17 @@
       "config": {
         "clientId": "263576382309-8hnp3s6goh2rel60284huaeqonqs54qg.apps.googleusercontent.com",
         "acceptsPromptNoneForwardFromClient": "false",
-        "disableUserInfo": "false",
-        "allowAdminRoleMapping": "false",
         "showInAccountConsole": "ALWAYS",
         "filteredByClaim": "false",
-        "syncMode": "FORCE",
-        "clientSecret": "**********",
         "caseSensitiveOriginalUsername": "false",
         "issuer": "https://accounts.google.com",
         "jwtAuthorizationGrantMaxAllowedAssertionExpiration": "3600",
-        "guiOrder": "1"
+        "disableUserInfo": "false",
+        "allowAdminRoleMapping": "false",
+        "syncMode": "FORCE",
+        "clientSecret": "**********",
+        "guiOrder": "1",
+        "defaultScope": "openid profile email"
       },
       "types": []
     },
@@ -1010,6 +1011,17 @@
       "identityProviderMapper": "microsoft-user-attribute-mapper",
       "config": {
         "syncMode": "INHERIT",
+        "userAttribute": "picture",
+        "jsonField": "picture"
+      }
+    },
+    {
+      "id": "4cc68129-9e6d-453a-94c4-0163dab0b8fd",
+      "name": "Profile Picture",
+      "identityProviderAlias": "google",
+      "identityProviderMapper": "google-user-attribute-mapper",
+      "config": {
+        "syncMode": "FORCE",
         "userAttribute": "picture",
         "jsonField": "picture"
       }
