@@ -117,6 +117,9 @@
           "name": "read"
         },
         {
+          "name": "read:draft"
+        },
+        {
           "name": "update"
         },
         {
@@ -211,7 +214,7 @@
       "config": {
         "resources": "[\"activity\"]",
         "scopes": "[\"create\"]",
-        "applyPolicies": "[\"STUDENT role policy\",\"ADMIN Role policy\"]"
+        "applyPolicies": "[\"STUDENT role policy\",\"GUEST Role policy\",\"ADMIN Role policy\"]"
       }
     },
     {
@@ -405,6 +408,18 @@
         "scopes": "[\"create\"]",
         "applyPolicies": "[\"ADMIN Role policy\"]"
       }
+    },
+    {
+      "name": "post.read:draft",
+      "description": "post.read:draft",
+      "type": "scope",
+      "logic": "POSITIVE",
+      "decisionStrategy": "UNANIMOUS",
+      "config": {
+        "resources": "[\"post\"]",
+        "scopes": "[\"read:draft\"]",
+        "applyPolicies": "[\"ADMIN Role policy\"]"
+      }
     }
   ],
   "scopes": [
@@ -432,6 +447,11 @@
       "name": "list",
       "iconUri": "",
       "displayName": "List"
+    },
+    {
+      "name": "read:draft",
+      "iconUri": "",
+      "displayName": "read:draft"
     }
   ],
   "decisionStrategy": "AFFIRMATIVE"
